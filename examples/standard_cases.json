@@ -4997,6 +4997,228 @@
    "effective_date": "2025-12-31"
   },
   {
+   "id": "pit_off_03",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.salary_only",
+   "name": "官方試算頁：單身、薪資 100 萬、免稅額 1 人 → 27,700",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 1000000
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "best": {
+      "tax": 27700,
+      "net_income": 554000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "pit_off_04",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.salary_only",
+   "name": "官方試算頁：單身、薪資 60 萬＋利息 10 萬 → 儲蓄投資特別扣除 10 萬、稅額 7,700",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 600000,
+      "interest": 100000
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "best": {
+      "tax": 7700,
+      "net_income": 154000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "pit_off_05",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.household",
+   "name": "官方試算頁：夫妻合併計稅，本人薪資 120 萬、配偶薪資 80 萬 → 91,660",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 1200000
+     },
+     {
+      "role": "spouse",
+      "salary": 800000
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "options": [
+      {},
+      {},
+      {},
+      {},
+      {
+       "method": "全部合併",
+       "tax": 91660,
+       "payable": 91660
+      }
+     ]
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "pit_off_06",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.household",
+   "name": "官方試算頁：單身、薪資 80 萬、扶養子女 10 歲 → 基本生活費差額 101,000、稅額 7,800",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 800000
+     },
+     {
+      "role": "dependent",
+      "relation": "child",
+      "age": 10
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "best": {
+      "tax": 7800,
+      "net_income": 156000
+     },
+     "basic_living_expense": {
+      "diff": 101000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "pit_off_07",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.salary_only",
+   "name": "官方試算頁：單身、薪資 300 萬 → 363,100（20% 級距）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 3000000
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "best": {
+      "tax": 363100,
+      "net_income": 2554000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "pit_off_08",
+   "tool": "calc_personal_income_tax",
+   "rule": "pit.household",
+   "name": "官方試算頁：夫妻、本人薪資 240 萬、配偶無收入、70 歲以上直系尊親屬 2 人 → 基本生活費差額 105,000、稅額 118,300",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "income_year": 2025,
+    "members": [
+     {
+      "role": "self",
+      "salary": 2400000
+     },
+     {
+      "role": "spouse"
+     },
+     {
+      "role": "dependent",
+      "relation": "parent",
+      "age": 72
+     },
+     {
+      "role": "dependent",
+      "relation": "parent",
+      "age": 72
+     }
+    ]
+   },
+   "expected": {
+    "output_subset": {
+     "best": {
+      "tax": 118300,
+      "net_income": 1330000
+     },
+     "basic_living_expense": {
+      "diff": 105000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/15",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
    "id": "vat_off_01",
    "tool": "calc_vat_payable",
    "rule": "vat.payable",

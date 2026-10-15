@@ -1,6 +1,6 @@
 # 標準案例範例
 
-159 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+165 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -129,6 +129,12 @@
 |---|---|---|---|---|---|
 | pit_off_01 | 官方範例一：3 口（本人、配偶、6 歲以下子女 1 人），列舉扣除額 30 萬、幼兒學前特別扣除額 15 萬 → 基本生活費總額 63.9 萬小於減除額 74.1 萬，差額 0 | income_year 2025、members [{"role":"self","salary":1000000},{"role":"spouse"},{"role":"dependent","relation":"child","age":5}]、household {"medical":300000} | basic_living_expense {"per_person":213000,"persons":3,"compare_total":741000,"diff":0} | 納稅者權利保護法第 4 條；財政部賦稅署 114 年度基本生活費計算參考範例 | 官方 |
 | pit_off_02 | 官方範例二：5 口（本人、配偶、大學子女、未滿 70 歲父母 2 人），標準扣除額、教育學費 2.5 萬、房屋租金 18 萬 → 總額 106.5 萬、減除額 95.2 萬，差額 11.3 萬 | income_year 2025、members [{"role":"self","salary":1000000},{"role":"spouse"},{"role":"dependent","relation":"child","age":20,"college_tuition":25000},{"role":"dependent","relation":"parent","age":65},{"role":"dependent","relation":"parent","age":66}]、household {"rent_paid":180000,"owns_home":false} | basic_living_expense {"per_person":213000,"persons":5,"compare_total":952000,"diff":113000} | 納稅者權利保護法第 4 條；財政部賦稅署 114 年度基本生活費計算參考範例 | 官方 |
+| pit_off_03 | 官方試算頁：單身、薪資 100 萬、免稅額 1 人 → 27,700 | income_year 2025、members [{"role":"self","salary":1000000}] | best {"tax":27700,"net_income":554000} | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
+| pit_off_04 | 官方試算頁：單身、薪資 60 萬＋利息 10 萬 → 儲蓄投資特別扣除 10 萬、稅額 7,700 | income_year 2025、members [{"role":"self","salary":600000,"interest":100000}] | best {"tax":7700,"net_income":154000} | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
+| pit_off_05 | 官方試算頁：夫妻合併計稅，本人薪資 120 萬、配偶薪資 80 萬 → 91,660 | income_year 2025、members [{"role":"self","salary":1200000},{"role":"spouse","salary":800000}] | options [{},{},{},{},{"method":"全部合併","tax":91660,"payable":91660}] | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
+| pit_off_06 | 官方試算頁：單身、薪資 80 萬、扶養子女 10 歲 → 基本生活費差額 101,000、稅額 7,800 | income_year 2025、members [{"role":"self","salary":800000},{"role":"dependent","relation":"child","age":10}] | best {"tax":7800,"net_income":156000}、basic_living_expense {"diff":101000} | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
+| pit_off_07 | 官方試算頁：單身、薪資 300 萬 → 363,100（20% 級距） | income_year 2025、members [{"role":"self","salary":3000000}] | best {"tax":363100,"net_income":2554000} | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
+| pit_off_08 | 官方試算頁：夫妻、本人薪資 240 萬、配偶無收入、70 歲以上直系尊親屬 2 人 → 基本生活費差額 105,000、稅額 118,300 | income_year 2025、members [{"role":"self","salary":2400000},{"role":"spouse"},{"role":"dependent","relation":"parent","age":72},{"role":"dependent","relation":"parent","age":72}] | best {"tax":118300,"net_income":1330000}、basic_living_expense {"diff":105000} | 所得稅法第 5 條（稅率）、第 17 條（免稅額與扣除額）；稅務入口網「綜合所得稅試算（114 年度）」 | 官方 |
 
 ## `calc_severance`
 

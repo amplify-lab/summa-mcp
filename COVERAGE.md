@@ -11,10 +11,10 @@
 | 試算工具（`calc_` 開頭） | 11 支 |
 | 有標準案例的試算工具 | 11 支 |
 | 規則 | 39 條 |
-| 標準案例 | 170 個 |
-| 官方案例 | 68 個（通過 68/68） |
+| 標準案例 | 176 個 |
+| 官方案例 | 74 個（通過 74/74） |
 | 自行設計案例 | 102 個（通過 102/102） |
-| 可放對外範例（`public: true`） | 159 個 |
+| 可放對外範例（`public: true`） | 165 個 |
 | 官方表格比對 | 7 張表、10515 列（通過 10515/10515） |
 
 ## 每支試算工具
@@ -28,7 +28,7 @@
 | `calc_entertainment_expense_limit` | 1 | 0 | 5 | 5/5 |  |
 | `calc_labor_health_insurance` | 6 | 11 | 8 | 19/19 |  |
 | `calc_overtime_pay` | 4 | 8 | 16 | 24/24 |  |
-| `calc_personal_income_tax` | 9 | 2 | 11 | 13/13 |  |
+| `calc_personal_income_tax` | 9 | 8 | 11 | 19/19 |  |
 | `calc_severance` | 4 | 12 | 9 | 21/21 |  |
 | `calc_vat_payable` | 1 | 8 | 10 | 18/18 |  |
 | `calc_withholding_and_nhi_supplement` | 9 | 10 | 24 | 34/34 |  |
@@ -65,8 +65,8 @@
 | `sev.old_new_mixed`<br>新舊制並存：舊制每年 1 個月、未滿 1 個月以 1 個月計，新制每年 1/2 個月 | `calc_severance` | 5 | 1 | 6/6 | — | — | 舊制年資：全部工作年資滿 25 年（符合勞基法第 53 條自請退休）；工作 10 年以上年滿 60 歲、15 年以上年滿 55 歲的退休條件 |
 | `sev.average_wage`<br>平均工資：最近 6 個月工資總額除以日數乘 30 | `calc_severance` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
 | `sev.notice`<br>預告期與預告工資：3 個月以上 10 日、1 年以上 20 日、3 年以上 30 日 | `calc_severance` | 2 | 3 | 5/5 | — | — | — |
-| `pit.salary_only`<br>單身薪資所得：免稅額、標準扣除額、薪資特別扣除額與級距 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
-| `pit.household`<br>夫妻與受扶養親屬：三種計稅方式擇優（合併、薪資分開、各類分開） | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
+| `pit.salary_only`<br>單身薪資所得：免稅額、標準扣除額、薪資特別扣除額與級距 | `calc_personal_income_tax` | 3 | 1 | 4/4 | — | 例外 | — |
+| `pit.household`<br>夫妻與受扶養親屬：三種計稅方式擇優（合併、薪資分開、各類分開） | `calc_personal_income_tax` | 3 | 2 | 5/5 | — | 邊界值、例外 | — |
 | `pit.dividend`<br>股利：合併 8.5% 可抵減（上限 8 萬）或分開 28% | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
 | `pit.basic_living_gap`<br>基本生活費差額（不含薪資特別扣除） | `calc_personal_income_tax` | 2 | 1 | 3/3 | — | 邊界值 | — |
 | `pit.rent_deduction`<br>房屋租金支出特別扣除額：實付金額與上限取低 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
