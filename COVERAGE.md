@@ -11,11 +11,11 @@
 | 試算工具（`calc_` 開頭） | 11 支 |
 | 有標準案例的試算工具 | 11 支 |
 | 規則 | 39 條 |
-| 標準案例 | 150 個 |
-| 官方案例 | 51 個（通過 51/51） |
-| 自行設計案例 | 99 個（通過 99/99） |
-| 可放對外範例（`public: true`） | 139 個 |
-| 官方表格比對 | 3 張表、10340 列（通過 10340/10340） |
+| 標準案例 | 162 個 |
+| 官方案例 | 61 個（通過 61/61） |
+| 自行設計案例 | 101 個（通過 101/101） |
+| 可放對外範例（`public: true`） | 151 個 |
+| 官方表格比對 | 7 張表、10515 列（通過 10515/10515） |
 
 ## 每支試算工具
 
@@ -28,9 +28,9 @@
 | `calc_entertainment_expense_limit` | 1 | 0 | 5 | 5/5 |  |
 | `calc_labor_health_insurance` | 6 | 11 | 8 | 19/19 |  |
 | `calc_overtime_pay` | 4 | 8 | 16 | 24/24 |  |
-| `calc_personal_income_tax` | 9 | 0 | 11 | 11/11 |  |
+| `calc_personal_income_tax` | 9 | 2 | 11 | 13/13 |  |
 | `calc_severance` | 4 | 12 | 9 | 21/21 |  |
-| `calc_vat_payable` | 1 | 0 | 8 | 8/8 |  |
+| `calc_vat_payable` | 1 | 8 | 10 | 18/18 |  |
 | `calc_withholding_and_nhi_supplement` | 9 | 10 | 24 | 34/34 |  |
 
 ## 每條規則
@@ -49,14 +49,14 @@
 | `ent.limit`<br>交際費限額：進貨、銷貨、各業別累進比例，外銷收入與業別加計 | `calc_entertainment_expense_limit` | 0 | 5 | 5/5 | — | — | — |
 | `don.limit`<br>營利事業捐贈列支限額：收益減損費後的比例；對政府捐贈不受限 | `calc_donation_limit` | 0 | 4 | 4/4 | — | — | — |
 | `dep.straight_line`<br>固定資產折舊（平均法）的財稅差異：財務耐用年數與稅法耐用年數、殘值不同 | `calc_depreciation_tax_book_difference` | 0 | 3 | 3/3 | — | — | — |
-| `vat.payable`<br>營業稅當期應納或溢付：銷項減進項、不得扣抵的進項、留抵 | `calc_vat_payable` | 0 | 8 | 8/8 | — | — | 只給整期銷售額時的銷項稅額進位；新設立營業人的第一期期間；電子發票小規模門檻 |
+| `vat.payable`<br>營業稅當期應納或溢付：銷項減進項、不得扣抵的進項、留抵 | `calc_vat_payable` | 8 | 10 | 18/18 | — | — | 只給整期銷售額時的銷項稅額進位；新設立營業人的第一期期間；電子發票小規模門檻；兼營應稅與免稅營業人的不得扣抵比例（比例扣抵法、直接扣抵法、年度最後一期調整、購買國外勞務的年度調整）；非加值型營業稅（特種稅額：銀行保險業、特種飲食業、小規模營業人等按銷售額乘稅率） |
 | `overtime.weekday`<br>平日延長工時加班費：前 2 小時 4/3、其後 5/3 | `calc_overtime_pay` | 2 | 6 | 8/8 | — | — | — |
 | `overtime.rest_day`<br>休息日出勤：前 2 小時 4/3、第 3 至 8 小時 5/3、第 9 小時起 8/3（依實際出勤時數計，勞動部試算系統未滿 4 小時不補足 4 小時） | `calc_overtime_pay` | 4 | 5 | 9/9 | — | 例外 | — |
 | `overtime.holiday`<br>國定假日出勤：8 小時內加給 1 日工資，延長工時照平日加給 | `calc_overtime_pay` | 2 | 4 | 6/6 | — | 邊界值、例外 | — |
 | `overtime.regular_day_off_disaster`<br>例假因天災、事變、突發事件出勤：工資加倍並補假 | `calc_overtime_pay` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
-| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 3 | 3 | 6/6 | 28 | 例外 | 被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免；115 年度以前年度、非 11.5% 的普通事故費率 |
+| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 3 | 3 | 6/6 | 50 | 例外 | 被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免；115 年度以前年度、非 11.5% 的普通事故費率 |
 | `ins.prorate_days`<br>到職或退保當月按投保日數計（勞保、就保、職災按日；健保、勞退依規則） | `calc_labor_health_insurance` | 3 | 2 | 5/5 | — | 一般、邊界值 | — |
-| `ins.part_time`<br>部分工時：勞保照最低級距投保 | `calc_labor_health_insurance` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
+| `ins.part_time`<br>部分工時：勞保照最低級距投保 | `calc_labor_health_insurance` | 0 | 1 | 1/1 | 56 | 一般、邊界值 | — |
 | `ins.health_dependents`<br>健保眷屬人數（本人加眷屬最多計 3 口）與雇主平均眷口數 | `calc_labor_health_insurance` | 3 | 1 | 4/4 | 232 | 例外 | 公民營事業受僱者以外的身分別（工會會員 60%、雇主 100%、公務人員 70%、私校教職員 35%、投保單位負擔 0%） |
 | `ins.pension_voluntary`<br>勞退雇主提繳 6% 與勞工自願提繳 1%～6% | `calc_labor_health_insurance` | 1 | 1 | 2/2 | — | 邊界值、例外 | — |
 | `leave.days`<br>特休日數（週年制）：滿 6 個月、1、2、3、5、10 年的日數 | `calc_annual_leave` | 10 | 5 | 15/15 | — | 例外 | — |
@@ -68,7 +68,7 @@
 | `pit.salary_only`<br>單身薪資所得：免稅額、標準扣除額、薪資特別扣除額與級距 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
 | `pit.household`<br>夫妻與受扶養親屬：三種計稅方式擇優（合併、薪資分開、各類分開） | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
 | `pit.dividend`<br>股利：合併 8.5% 可抵減（上限 8 萬）或分開 28% | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
-| `pit.basic_living_gap`<br>基本生活費差額（不含薪資特別扣除） | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
+| `pit.basic_living_gap`<br>基本生活費差額（不含薪資特別扣除） | `calc_personal_income_tax` | 2 | 1 | 3/3 | — | 邊界值 | — |
 | `pit.rent_deduction`<br>房屋租金支出特別扣除額：實付金額與上限取低 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
 | `pit.wealth_exclusion`<br>高所得排富：薪資高於門檻不適用特定特別扣除 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
 | `pit.royalty_cost`<br>稿費：超過 18 萬的部分減除 30% 成本費用 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
@@ -77,7 +77,7 @@
 | `nhi.interest`<br>利息所得的補充保費：單次給付達 20,000 元起扣、2.11%（不同存單分別判斷） | `calc_withholding_and_nhi_supplement` | 2 | 0 | 2/2 | — | 例外 | — |
 | `nhi.rent`<br>租金收入的補充保費：單次給付達 20,000 元起扣、2.11%（一次付多個月以給付總額計） | `calc_withholding_and_nhi_supplement` | 2 | 0 | 2/2 | — | 例外 | — |
 | `nhi.dividend`<br>股利所得的補充保費：單次給付達 20,000 元起扣、2.11% | `calc_withholding_and_nhi_supplement` | 1 | 0 | 1/1 | — | 邊界值、例外 | 雇主或自營業主身分投保者的股利：可扣除已列入投保金額計算的部分；臺灣存託憑證（TDR）股利（海外所得，不扣補充保費） |
-| `ins.occupational`<br>職災保險費：雇主全額負擔，災保月投保薪資 × 災保費率（行業別費率加上下班 0.07%） | `calc_labor_health_insurance` | 1 | 0 | 1/1 | — | 邊界值、例外 | — |
+| `ins.occupational`<br>職災保險費：雇主全額負擔，災保月投保薪資 × 災保費率（行業別費率加上下班 0.07%） | `calc_labor_health_insurance` | 1 | 0 | 1/1 | 97 | 邊界值、例外 | — |
 
 ## 官方表格比對
 
@@ -86,7 +86,11 @@
 | 表 | 規則 | 來源 | 查詢日 | 列數 | 通過 |
 |---|---|---|---|---|---|
 | 勞工保險保險費分擔金額表（勞保普通事故 11.5%＋就業保險 1%，115 年 1 月 1 日起）：28 級的勞工自付與單位負擔 | `ins.full_month` | [勞動部勞工保險局「勞工保險保險費分擔金額表」（政府資料開放平臺，JSON 下載 A17000000J-020015-t0a）](https://data.gov.tw/dataset/6259) | 2026-10-15 | 28 | 28/28 |
+| 勞工保險投保薪資分級表（115 年 1 月 1 日起）：一般勞工 11 級，每級取兩端與端外的月薪對照月投保薪資 | `ins.full_month` | [勞動部勞工保險局「勞工保險投保薪資分級表（115 年 1 月 1 日起適用）」（政府資料開放平臺 6258，114/11/21 勞動保2字第 1140091863 號令）](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-020014-q8B) | 2026-10-15 | 22 | 22/22 |
+| 勞工保險投保薪資分級表（115 年 1 月 1 日起）：部分工時勞工 28 級，每級取兩端與端外的月薪對照月投保薪資 | `ins.part_time` | [勞動部勞工保險局「勞工保險投保薪資分級表（115 年 1 月 1 日起適用）」（政府資料開放平臺 6258，114/11/21 勞動保2字第 1140091863 號令）](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-020014-q8B) | 2026-10-15 | 56 | 56/56 |
 | 全民健康保險保險費負擔金額表（公、民營事業、機構及有一定雇主之受僱者，115 年 1 月 1 日起）：58 級 × 眷屬 0 至 3 人，本人（含眷屬）自付與投保單位負擔 | `ins.health_dependents` | [衛生福利部中央健康保險署「保險費負擔金額表（三）」](https://www.nhi.gov.tw/ch/cp-19418-9eefb-2576-1.html) | 2026-10-15 | 232 | 232/232 |
+| 勞工職業災害保險投保薪資分級表（115 年 1 月 1 日起）：21 級，每級取兩端與端外的月薪對照職災月投保薪資 | `ins.occupational` | [勞動部勞工保險局「勞工職業災害保險投保薪資分級表（115 年 1 月 1 日起適用）」（政府資料開放平臺 170557）](https://apiservice.mol.gov.tw/OdService/download/A17000000J-030566-hUW) | 2026-10-15 | 42 | 42/42 |
+| 勞工職業災害保險適用行業別災害費率表（114 年 1 月 1 日起，每 3 年調整）：55 種行業別的行業別費率、上下班費率（0.07%）與災保費率 | `ins.occupational` | [勞動部勞工保險局「勞工職業災害保險適用行業別災害費率表」（政府資料開放平臺 6262）](https://apiservice.mol.gov.tw/OdService/download/A17000000J-020018-K6H) | 2026-10-15 | 55 | 55/55 |
 | 115 年度薪資所得扣繳稅額表：月薪 80,001～500,000（每 500 元一級，840 級）× 配偶及受扶養親屬人數 0～11（12 欄），居住者每月薪資、已填免稅額申報表（查表） | `wht.salary_monthly` | [115 年度薪資所得扣繳稅額表（財政部賦稅署，114-12-04 台財稅字第 11404675280 號函；附件 1，25 頁）](https://www.dot.gov.tw/download/52040e15e8df4b74a7d8c5188620a35c) | 2026-10-15 | 10080 | 10080/10080 |
 
 ## 沒通過的案例
@@ -112,6 +116,8 @@
 - **只給整期銷售額時的銷項稅額進位**：由銷售額估算銷項稅額，進位方式待查（工具回應寫明是估算）
 - **新設立營業人的第一期期間**：參數 vat_new_business_first_period 標待查
 - **電子發票小規模門檻**：參數 vat_einvoice_small_scale_threshold 標待查
+- **兼營應稅與免稅營業人的不得扣抵比例（比例扣抵法、直接扣抵法、年度最後一期調整、購買國外勞務的年度調整）**：財政部稅務入口網 Q&A 9501、9502 只有文字公式、沒有金額算例，工具沒有銷售額比例與專供免稅欄位；請用 non_deductible_input_tax 自行帶入算好的不得扣抵稅額
+- **非加值型營業稅（特種稅額：銀行保險業、特種飲食業、小規模營業人等按銷售額乘稅率）**：試算頁（稅務入口網營業稅試算）有這個計算，工具沒有這個模式；稅率在 get_tax_parameter（vat_rate_small_scale、vat_rate_reinsurance、vat_rate_financial_non_core、vat_rate_financial_other、vat_rate_special_food_nightclub、vat_rate_special_food_bar、vat_rate_farm_wholesale）
 
 ### `ins.full_month`
 - **被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免**：勞保局試算頁有這些類別與減免；工具只算有一定雇主、參加就保的員工，沒有被保險人類別與身心障礙等級的輸入欄位

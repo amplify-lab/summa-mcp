@@ -1,6 +1,6 @@
 # 標準案例範例
 
-139 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+151 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -115,6 +115,13 @@
 | ot_off_08 | 一般：月薪 42,000，國定假日出勤 10 小時（延長工時照平日加給） | date 2026-10-03、pay_type monthly、wage 42000、day_type holiday、hours_worked 10 | result {"extra_pay":1867} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
 | ot_off_09 | 官方舉例的時薪：月薪 36,000 ÷30÷8＝150，平日延長 1 小時加給 150×4/3＝200 | date 2026-10-03、pay_type monthly、wage 36000、day_type weekday、hours_worked 9 | result {"extra_pay":200} | 勞動基準法第 24 條；勞動部加班費計算基礎澄清稿 | 自行設計 |
 
+## `calc_personal_income_tax`
+
+| 編號 | 情境 | 輸入 | 結果 | 法源 | 來源 |
+|---|---|---|---|---|---|
+| pit_off_01 | 官方範例一：3 口（本人、配偶、6 歲以下子女 1 人），列舉扣除額 30 萬、幼兒學前特別扣除額 15 萬 → 基本生活費總額 63.9 萬小於減除額 74.1 萬，差額 0 | income_year 2025、members [{"role":"self","salary":1000000},{"role":"spouse"},{"role":"dependent","relation":"child","age":5}]、household {"medical":300000} | basic_living_expense {"per_person":213000,"persons":3,"compare_total":741000,"diff":0} | 納稅者權利保護法第 4 條；財政部賦稅署 114 年度基本生活費計算參考範例 | 官方 |
+| pit_off_02 | 官方範例二：5 口（本人、配偶、大學子女、未滿 70 歲父母 2 人），標準扣除額、教育學費 2.5 萬、房屋租金 18 萬 → 總額 106.5 萬、減除額 95.2 萬，差額 11.3 萬 | income_year 2025、members [{"role":"self","salary":1000000},{"role":"spouse"},{"role":"dependent","relation":"child","age":20,"college_tuition":25000},{"role":"dependent","relation":"parent","age":65},{"role":"dependent","relation":"parent","age":66}]、household {"rent_paid":180000,"owns_home":false} | basic_living_expense {"per_person":213000,"persons":5,"compare_total":952000,"diff":113000} | 納稅者權利保護法第 4 條；財政部賦稅署 114 年度基本生活費計算參考範例 | 官方 |
+
 ## `calc_severance`
 
 | 編號 | 情境 | 輸入 | 結果 | 法源 | 來源 |
@@ -153,6 +160,16 @@
 | vat_06 | 只給應稅銷售額：由稅率算銷項稅額 | taxable_sales 2000000、input_tax 42000、non_deductible_input_tax 0、prior_credit 0、date 2026-09-30 | payable 58000、credit_carried 0 | 加值型及非加值型營業稅法第 15 條第 1 項、第 19 條、第 39 條第 2 項 | 自行設計 |
 | vat_07 | 剛好為 0 | output_tax 45000、input_tax 45000、non_deductible_input_tax 0、prior_credit 0、date 2026-09-30 | payable 0、credit_carried 0 | 加值型及非加值型營業稅法第 15 條第 1 項、第 19 條、第 39 條第 2 項 | 自行設計 |
 | vat_08 | 三聯式與二聯式混合、含不得扣抵 | output_tax 125000、input_tax 70000、non_deductible_input_tax 3000、prior_credit 0、date 2026-09-30 | payable 58000、credit_carried 0 | 加值型及非加值型營業稅法第 15 條第 1 項、第 19 條、第 39 條第 2 項 | 自行設計 |
+| vat_off_01 | 官方試算頁：銷項 15,000、進項 10,000 → 應納 5,000 | output_tax 15000、input_tax 10000、date 2026-10-03 | result {"payable":5000,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_02 | 官方試算頁：銷項 100,000、進項 60,000 → 應納 40,000 | output_tax 100000、input_tax 60000、date 2026-10-03 | result {"payable":40000,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_03 | 官方試算頁：銷項＝進項 50,000 → 0 | output_tax 50000、input_tax 50000、date 2026-10-03 | result {"payable":0,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_04 | 官方試算頁：銷項 30,000、進項 80,000 → 溢付 50,000（工具：應納 0、留抵 50,000） | output_tax 30000、input_tax 80000、date 2026-10-03 | result {"payable":0,"credit_carried":50000} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_05 | 官方試算頁：銷項 1,234,567、進項 654,321 → 應納 580,246 | output_tax 1234567、input_tax 654321、date 2026-10-03 | result {"payable":580246,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_06 | 官方試算頁：銷項 2,500、進項 0 → 應納 2,500 | output_tax 2500、input_tax 0、date 2026-10-03 | result {"payable":2500,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_07 | 官方試算頁：銷項 0、進項 3,000 → 溢付 3,000（工具：應納 0、留抵 3,000） | output_tax 0、input_tax 3000、date 2026-10-03 | result {"payable":0,"credit_carried":3000} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_off_08 | 官方試算頁：銷項 999,999、進項 1 → 應納 999,998 | output_tax 999999、input_tax 1、date 2026-10-03 | result {"payable":999998,"credit_carried":0} | 加值型及非加值型營業稅法第 15 條第 1 項、第 39 條；財政部稅務入口網營業稅試算 | 官方 |
+| vat_401_01 | 401 欄位公式：銷項合計 80,000、得扣抵進項 100,000、上期留抵 5,000 → 實繳 0、本期留抵 25,000 | output_tax 80000、input_tax 100000、date 2026-10-03、prior_credit 5000 | result {"payable":0,"credit_carried":25000} | 加值型及非加值型營業稅法第 39 條；營業稅申報書（401）填表說明 | 自行設計 |
+| vat_401_02 | 401 欄位公式：銷項合計 50,000、得扣抵進項 30,000、上期留抵 30,000 → 實繳 0、本期留抵 10,000 | output_tax 50000、input_tax 30000、date 2026-10-03、prior_credit 30000 | result {"payable":0,"credit_carried":10000} | 加值型及非加值型營業稅法第 39 條；營業稅申報書（401）填表說明 | 自行設計 |
 
 ## `calc_withholding_and_nhi_supplement`
 
