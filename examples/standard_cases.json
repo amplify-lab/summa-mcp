@@ -4369,6 +4369,532 @@
    "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
    "retrieved_at": "2026-10-15",
    "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_09",
+   "tool": "calc_severance",
+   "rule": "sev.old_new_mixed",
+   "name": "官方舉例：舊制資遣費，平均工資 30,000、年資 3 年 6 個月 15 天 → 約 107,500（30,000×(3＋7/12)）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "old_years": 3,
+    "old_months": 6,
+    "old_days": 15,
+    "average_monthly_wage": 30000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "old_system": {
+       "amount": 107500
+      },
+      "severance_total": 107500
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費說明頁面舉例",
+   "source_url": "https://www.mol.gov.tw/1607/28162/28296/81778/81793/81935/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_10",
+   "tool": "calc_severance",
+   "rule": "sev.new_system",
+   "name": "官方舉例：新制資遣費，平均工資 30,000、年資 3 年 6 個月 15 天 → 約 53,125（30,000×1/2×(3＋6.5/12)）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "new_years": 3,
+    "new_months": 6,
+    "new_days": 15,
+    "average_monthly_wage": 30000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "new_system": {
+       "amount": 53125
+      },
+      "severance_total": 53125
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費說明頁面舉例",
+   "source_url": "https://www.mol.gov.tw/1607/28162/28296/81778/81793/81935/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "notice_off_01",
+   "tool": "calc_severance",
+   "rule": "sev.notice",
+   "name": "官方舉例：年資 2 年 6 個月、應預告 20 日、未預告，月薪 30,000 → 預告期間工資 20×(30,000÷30)＝20,000",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "service_months_for_notice": 30,
+    "monthly_wage_for_notice": 30000,
+    "notice_days_given": 0
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "notice": {
+       "required_days": 20,
+       "short_days": 20,
+       "notice_pay": 20000
+      }
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋",
+   "source_url": "https://www.mol.gov.tw/1607/28162/28296/28340/28342/28348/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "notice_off_02",
+   "tool": "calc_severance",
+   "rule": "sev.notice",
+   "name": "官方舉例：同上，平均工資 1,100 元／日較一日工資 1,000 高 → 預告期間工資 20×1,100＝22,000",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "service_months_for_notice": 30,
+    "monthly_wage_for_notice": 30000,
+    "notice_days_given": 0,
+    "average_monthly_wage": 33000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "notice": {
+       "required_days": 20,
+       "short_days": 20,
+       "notice_pay": 22000
+      }
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋",
+   "source_url": "https://www.mol.gov.tw/1607/28162/28296/28340/28342/28348/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "notice_off_03",
+   "tool": "calc_severance",
+   "rule": "sev.notice",
+   "name": "官方規則：平均工資每日 900 低於一日工資 1,000 → 仍用一日工資，20×1,000＝20,000",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "service_months_for_notice": 30,
+    "monthly_wage_for_notice": 30000,
+    "notice_days_given": 0,
+    "average_monthly_wage": 27000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "notice": {
+       "required_days": 20,
+       "short_days": 20,
+       "notice_pay": 20000
+      }
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋",
+   "source_url": "https://www.mol.gov.tw/1607/28162/28296/28340/28342/28348/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_09",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.weekday",
+   "name": "官方舉例的時薪：月薪 36,000 ÷30÷8＝150，平日延長 1 小時加給 150×4/3＝200",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 36000,
+    "day_type": "weekday",
+    "hours_worked": 9
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 200
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條；勞動部加班費計算基礎澄清稿",
+   "source_url": "https://www.mol.gov.tw/1607/1632/2660/20911/",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_07",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "法條表：滿 1 年、未滿 2 年 → 7 日",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2025-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 7
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條第 1 項",
+   "source_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_08",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "法條表：滿 10 年以上每年加 1 日 → 滿 11 年 17 日",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2015-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 17
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條第 1 項",
+   "source_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_09",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "法條表：加至 30 日為止 → 滿 24 年 30 日",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2002-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條第 1 項",
+   "source_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_10",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "法條表：30 日上限 → 滿 25 年仍 30 日",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2001-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條第 1 項",
+   "source_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_01",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.professional_fee_resident",
+   "name": "官方規則句：居住者稿費 20,000，稅額 10%＝2,000，不超過 2,000 免扣",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "9B",
+    "amount": 20000,
+    "residency": "resident"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 0
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_02",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.professional_fee_resident",
+   "name": "官方規則句：居住者稿費 20,010，稅額 2,001 超過 2,000 要扣",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "9B",
+    "amount": 20010,
+    "residency": "resident"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 2001
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_03",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.non_resident",
+   "name": "官方規則句：非居住者稿費 5,001 超過 5,000，按給付額 20%＝1,000",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "9B",
+    "amount": 5001,
+    "residency": "nonresident"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 1000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_04",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.non_resident",
+   "name": "官方規則句：非居住者執行業務報酬 5,000，沒有 5,000 免扣規則句，按 20%＝1,000",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "9A",
+    "amount": 5000,
+    "residency": "nonresident"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 1000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_05",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.non_resident",
+   "name": "官方規則句：非居住者每月薪資 100,000 超過基本工資 1.5 倍，按全月給付 18%＝18,000",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "50",
+    "amount": 100000,
+    "residency": "nonresident",
+    "salary_kind": "other"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 18000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_06",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.non_resident",
+   "name": "官方規則句：非居住者每月薪資 44,250（＝基本工資 29,500×1.5，剛好以下），按 6%＝2,655",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "50",
+    "amount": 44250,
+    "residency": "nonresident",
+    "salary_kind": "other"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 2655
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_07",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.non_resident",
+   "name": "官方規則句：非居住者每月薪資 44,500（超過 44,250），按 18%＝8,010",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": false,
+    "nhi_insured": false,
+    "income_type_code": "50",
+    "amount": 44500,
+    "residency": "nonresident",
+    "salary_kind": "other"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 8010
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "v11_08",
+   "tool": "calc_withholding_and_nhi_supplement",
+   "rule": "wht.salary_monthly",
+   "name": "官方規則句：居住者每月薪資選全月 5%，40,020 稅額 2,001 超過 2,000 要扣",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-10-03",
+    "paid_by_insured_unit": true,
+    "nhi_insured": false,
+    "income_type_code": "50",
+    "amount": 40020,
+    "residency": "resident",
+    "salary_kind": "other",
+    "salary_method": "flat"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "withholding_tax": 2001
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
   }
  ]
 }

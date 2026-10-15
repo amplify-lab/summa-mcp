@@ -1,6 +1,6 @@
 # 標準案例範例
 
-121 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+139 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -20,6 +20,10 @@
 | leave_off_04 | 邊界：2016-10-02 到職、2026-10-02 週年日（滿 10 年）→ 16 日 | date 2026-10-03、hire_date 2016-10-02、as_of_date 2026-10-02 | result {"days":16} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
 | leave_off_05 | 一般：2021-03-15 到職、2026-03-15 週年日（滿 5 年）→ 15 日 | date 2026-10-03、hire_date 2021-03-15、as_of_date 2026-03-15 | result {"days":15} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
 | leave_off_06 | 一般：2023-08-15 到職、2026-08-15 週年日（滿 3 年）→ 14 日 | date 2026-10-03、hire_date 2023-08-15、as_of_date 2026-08-15 | result {"days":14} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_07 | 法條表：滿 1 年、未滿 2 年 → 7 日 | date 2026-10-03、hire_date 2025-10-02、as_of_date 2026-10-02 | result {"days":7} | 勞動基準法第 38 條第 1 項 | 官方 |
+| leave_off_08 | 法條表：滿 10 年以上每年加 1 日 → 滿 11 年 17 日 | date 2026-10-03、hire_date 2015-10-02、as_of_date 2026-10-02 | result {"days":17} | 勞動基準法第 38 條第 1 項 | 官方 |
+| leave_off_09 | 法條表：加至 30 日為止 → 滿 24 年 30 日 | date 2026-10-03、hire_date 2002-10-02、as_of_date 2026-10-02 | result {"days":30} | 勞動基準法第 38 條第 1 項 | 官方 |
+| leave_off_10 | 法條表：30 日上限 → 滿 25 年仍 30 日 | date 2026-10-03、hire_date 2001-10-02、as_of_date 2026-10-02 | result {"days":30} | 勞動基準法第 38 條第 1 項 | 官方 |
 
 ## `calc_business_income_tax`
 
@@ -109,6 +113,7 @@
 | ot_off_06 | 邊界：月薪 36,000，休息日 2 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type rest_day、hours_worked 2 | result {"extra_pay":400} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
 | ot_off_07 | 一般：月薪 36,000，國定假日出勤 8 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type holiday、hours_worked 8 | result {"extra_pay":1200} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
 | ot_off_08 | 一般：月薪 42,000，國定假日出勤 10 小時（延長工時照平日加給） | date 2026-10-03、pay_type monthly、wage 42000、day_type holiday、hours_worked 10 | result {"extra_pay":1867} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_09 | 官方舉例的時薪：月薪 36,000 ÷30÷8＝150，平日延長 1 小時加給 150×4/3＝200 | date 2026-10-03、pay_type monthly、wage 36000、day_type weekday、hours_worked 9 | result {"extra_pay":200} | 勞動基準法第 24 條；勞動部加班費計算基礎澄清稿 | 自行設計 |
 
 ## `calc_severance`
 
@@ -130,6 +135,11 @@
 | sev_off_04 | 例外：全舊制 1999-05-10 到職、2026-09-30 資遣（工作年資 27 年），平均工資 50,000：官方回 0，已符合退休條件 | date 2026-10-03、old_system_start_date 1999-05-10、end_date 2026-09-30、average_monthly_wage 50000 | result {"old_system":{"amount":null,"status":"retirement_conditions_met"},"severance_total":null}、unsupported [{"code":"retirement_conditions_met"}] | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
 | sev_off_07 | 例外：舊制 2000-01-01 起、2005-07-01 轉新制、2026-09-30 資遣（全部年資 26 年 9 個月），平均工資 62,000：舊制部分不算、新制 372,000 | date 2026-10-03、old_system_start_date 2000-01-01、new_system_start_date 2005-07-01、end_date 2026-09-30、average_monthly_wage 62000 | result {"old_system":{"amount":null,"status":"retirement_conditions_met"},"new_system":{"amount":372000},"new_system_only_total":372000,"severance_total":null} | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
 | sev_off_08 | 邊界：全舊制 2002-05-01 到職、2026-09-30 資遣（24 年 5 個月），平均工資 50,000 → 1,220,834（附退休提示） | date 2026-10-03、old_system_start_date 2002-05-01、end_date 2026-09-30、average_monthly_wage 50000 | result {"severance_total":1220834} | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_09 | 官方舉例：舊制資遣費，平均工資 30,000、年資 3 年 6 個月 15 天 → 約 107,500（30,000×(3＋7/12)） | date 2026-10-03、old_years 3、old_months 6、old_days 15、average_monthly_wage 30000 | result {"old_system":{"amount":107500},"severance_total":107500} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費說明頁面舉例 | 官方 |
+| sev_off_10 | 官方舉例：新制資遣費，平均工資 30,000、年資 3 年 6 個月 15 天 → 約 53,125（30,000×1/2×(3＋6.5/12)） | date 2026-10-03、new_years 3、new_months 6、new_days 15、average_monthly_wage 30000 | result {"new_system":{"amount":53125},"severance_total":53125} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費說明頁面舉例 | 官方 |
+| notice_off_01 | 官方舉例：年資 2 年 6 個月、應預告 20 日、未預告，月薪 30,000 → 預告期間工資 20×(30,000÷30)＝20,000 | date 2026-10-03、service_months_for_notice 30、monthly_wage_for_notice 30000、notice_days_given 0 | result {"notice":{"required_days":20,"short_days":20,"notice_pay":20000}} | 勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋 | 官方 |
+| notice_off_02 | 官方舉例：同上，平均工資 1,100 元／日較一日工資 1,000 高 → 預告期間工資 20×1,100＝22,000 | date 2026-10-03、service_months_for_notice 30、monthly_wage_for_notice 30000、notice_days_given 0、average_monthly_wage 33000 | result {"notice":{"required_days":20,"short_days":20,"notice_pay":22000}} | 勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋 | 官方 |
+| notice_off_03 | 官方規則：平均工資每日 900 低於一日工資 1,000 → 仍用一日工資，20×1,000＝20,000 | date 2026-10-03、service_months_for_notice 30、monthly_wage_for_notice 30000、notice_days_given 0、average_monthly_wage 27000 | result {"notice":{"required_days":20,"short_days":20,"notice_pay":20000}} | 勞動基準法第 16 條第 3 項；勞動部 109.10.29 勞動關2字第 1090128292A 號令釋 | 自行設計 |
 
 ## `calc_vat_payable`
 
@@ -174,3 +184,11 @@
 | nhi_off_08 | 一般：月租 100,000 一次付 6 個月租金 600,000 → 12,660 | residency resident、nhi_insured true、date 2021-08-05、income_type_code 51、amount 600000、paid_by_insured_unit false | result {"nhi_supplement":12660} | 全民健康保險法第 31 條；全民健康保險扣取及繳納補充保險費辦法 | 官方 |
 | nhi_off_09 | 邊界：月租 20,000（剛好達單次門檻）→ 422，票面 19,578 | residency resident、nhi_insured true、date 2021-08-05、income_type_code 51、amount 20000、paid_by_insured_unit false | result {"nhi_supplement":422} | 全民健康保險法第 31 條；全民健康保險扣取及繳納補充保險費辦法 | 官方 |
 | nhi_off_10 | 一般：股利 30,000 → 633 | residency resident、nhi_insured true、date 2021-08-05、income_type_code 54C、amount 30000、paid_by_insured_unit false | result {"nhi_supplement":633} | 全民健康保險法第 31 條；全民健康保險扣取及繳納補充保險費辦法 | 官方 |
+| v11_01 | 官方規則句：居住者稿費 20,000，稅額 10%＝2,000，不超過 2,000 免扣 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 9B、amount 20000、residency resident | result {"withholding_tax":0} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_02 | 官方規則句：居住者稿費 20,010，稅額 2,001 超過 2,000 要扣 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 9B、amount 20010、residency resident | result {"withholding_tax":2001} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_03 | 官方規則句：非居住者稿費 5,001 超過 5,000，按給付額 20%＝1,000 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 9B、amount 5001、residency nonresident | result {"withholding_tax":1000} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_04 | 官方規則句：非居住者執行業務報酬 5,000，沒有 5,000 免扣規則句，按 20%＝1,000 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 9A、amount 5000、residency nonresident | result {"withholding_tax":1000} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_05 | 官方規則句：非居住者每月薪資 100,000 超過基本工資 1.5 倍，按全月給付 18%＝18,000 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 50、amount 100000、residency nonresident、salary_kind other | result {"withholding_tax":18000} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_06 | 官方規則句：非居住者每月薪資 44,250（＝基本工資 29,500×1.5，剛好以下），按 6%＝2,655 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 50、amount 44250、residency nonresident、salary_kind other | result {"withholding_tax":2655} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_07 | 官方規則句：非居住者每月薪資 44,500（超過 44,250），按 18%＝8,010 | date 2026-10-03、paid_by_insured_unit false、nhi_insured false、income_type_code 50、amount 44500、residency nonresident、salary_kind other | result {"withholding_tax":8010} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |
+| v11_08 | 官方規則句：居住者每月薪資選全月 5%，40,020 稅額 2,001 超過 2,000 要扣 | date 2026-10-03、paid_by_insured_unit true、nhi_insured false、income_type_code 50、amount 40020、residency resident、salary_kind other、salary_method flat | result {"withholding_tax":2001} | 所得稅法第 88 條；各類所得扣繳率標準；財政部稅務入口網 Q&A | 自行設計 |

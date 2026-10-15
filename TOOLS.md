@@ -194,7 +194,7 @@
 | `old_days` | integer |  | 舊制年資：日；最小 0 |
 | `service_months_for_notice` | integer |  | 算預告期用的繼續工作月數（沒帶就用年資）；最小 0 |
 | `notice_days_given` | integer |  | 已經預告的日數；最小 0 |
-| `monthly_wage_for_notice` | integer |  | 算預告工資用的月薪（一日工資＝月薪÷30）；最小 0 |
+| `monthly_wage_for_notice` | integer |  | 算預告工資用的月薪（一日工資＝月薪÷30；平均工資每日較高的以平均工資計，勞動部 109.10.29 令釋）；最小 0 |
 | `date` | string |  | YYYY-MM-DD；用哪一天有效的規則 |
 
 ## calc_vat_payable

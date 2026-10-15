@@ -11,27 +11,27 @@
 | 試算工具（`calc_` 開頭） | 11 支 |
 | 有標準案例的試算工具 | 11 支 |
 | 規則 | 39 條 |
-| 標準案例 | 132 個 |
-| 官方案例 | 43 個（通過 43/43） |
-| 自行設計案例 | 89 個（通過 89/89） |
-| 可放對外範例（`public: true`） | 121 個 |
-| 官方表格比對 | 2 張表、260 列（通過 260/260） |
+| 標準案例 | 150 個 |
+| 官方案例 | 51 個（通過 51/51） |
+| 自行設計案例 | 99 個（通過 99/99） |
+| 可放對外範例（`public: true`） | 139 個 |
+| 官方表格比對 | 3 張表、10340 列（通過 10340/10340） |
 
 ## 每支試算工具
 
 | 工具 | 規則 | 官方案例 | 自行設計案例 | 通過 | 說明 |
 |---|---|---|---|---|---|
-| `calc_annual_leave` | 2 | 6 | 6 | 12/12 |  |
+| `calc_annual_leave` | 2 | 10 | 6 | 16/16 |  |
 | `calc_business_income_tax` | 1 | 0 | 5 | 5/5 |  |
 | `calc_depreciation_tax_book_difference` | 1 | 0 | 3 | 3/3 |  |
 | `calc_donation_limit` | 1 | 0 | 4 | 4/4 |  |
 | `calc_entertainment_expense_limit` | 1 | 0 | 5 | 5/5 |  |
 | `calc_labor_health_insurance` | 6 | 11 | 8 | 19/19 |  |
-| `calc_overtime_pay` | 4 | 8 | 15 | 23/23 |  |
+| `calc_overtime_pay` | 4 | 8 | 16 | 24/24 |  |
 | `calc_personal_income_tax` | 9 | 0 | 11 | 11/11 |  |
-| `calc_severance` | 4 | 8 | 8 | 16/16 |  |
+| `calc_severance` | 4 | 12 | 9 | 21/21 |  |
 | `calc_vat_payable` | 1 | 0 | 8 | 8/8 |  |
-| `calc_withholding_and_nhi_supplement` | 9 | 10 | 16 | 26/26 |  |
+| `calc_withholding_and_nhi_supplement` | 9 | 10 | 24 | 34/34 |  |
 
 ## 每條規則
 
@@ -39,18 +39,18 @@
 
 | 規則 | 工具 | 官方 | 自行設計 | 通過 | 官方表格列 | 缺的標籤 | 已知不支援或待查 |
 |---|---|---|---|---|---|---|---|
-| `wht.professional_fee_resident`<br>居住者執行業務報酬：扣繳稅額（10%、2,000 元免扣）與二代健保補充保費（20,000 元起扣、2.11%） | `calc_withholding_and_nhi_supplement` | 0 | 3 | 3/3 | — | 例外 | 補充保費元以下的進位方式 |
-| `wht.non_resident`<br>非居住者的各類所得扣繳（不適用 2,000 元免扣；稿費等七項 5,000 元以下免扣） | `calc_withholding_and_nhi_supplement` | 0 | 2 | 2/2 | — | 一般、邊界值 | 扣繳率欄位為待查的所得類別 |
+| `wht.professional_fee_resident`<br>居住者執行業務報酬：扣繳稅額（10%、2,000 元免扣）與二代健保補充保費（20,000 元起扣、2.11%） | `calc_withholding_and_nhi_supplement` | 0 | 5 | 5/5 | — | 例外 | 補充保費元以下的進位方式 |
+| `wht.non_resident`<br>非居住者的各類所得扣繳（不適用 2,000 元免扣；稿費等七項 5,000 元以下免扣） | `calc_withholding_and_nhi_supplement` | 0 | 7 | 7/7 | — | — | 扣繳率欄位為待查的所得類別 |
 | `nhi.bonus_over_4x`<br>所屬投保單位給付的獎金：全年累計逾投保金額 4 倍的部分計收補充保費 | `calc_withholding_and_nhi_supplement` | 5 | 1 | 6/6 | — | — | — |
 | `nhi.part_time_salary`<br>非所屬投保單位給付的兼職薪資：達基本工資計收補充保費 | `calc_withholding_and_nhi_supplement` | 0 | 2 | 2/2 | — | 一般、例外 | — |
-| `wht.salary_monthly`<br>居住者每月薪資扣繳：查扣繳稅額表，或未填免稅額申報表按 5% | `calc_withholding_and_nhi_supplement` | 0 | 5 | 5/5 | — | 例外 | 薪資起扣點尚未公告的年度；月薪超出稅額表列範圍的元以下處理 |
+| `wht.salary_monthly`<br>居住者每月薪資扣繳：查扣繳稅額表，或未填免稅額申報表按 5% | `calc_withholding_and_nhi_supplement` | 0 | 6 | 6/6 | 10080 | 例外 | 薪資起扣點尚未公告的年度；月薪超出稅額表列範圍的元以下處理 |
 | `wht.salary_non_monthly`<br>非每月給付（獎金）與兼職所得扣繳：起扣標準以上按給付額 5% | `calc_withholding_and_nhi_supplement` | 0 | 3 | 3/3 | — | 例外 | 5% 扣繳稅額出現元以下尾數的進位 |
 | `cit.rate`<br>營利事業所得稅：課稅所得 12 萬元以下免稅、超過部分的減半規則與稅率 | `calc_business_income_tax` | 0 | 5 | 5/5 | — | 例外 | — |
 | `ent.limit`<br>交際費限額：進貨、銷貨、各業別累進比例，外銷收入與業別加計 | `calc_entertainment_expense_limit` | 0 | 5 | 5/5 | — | — | — |
 | `don.limit`<br>營利事業捐贈列支限額：收益減損費後的比例；對政府捐贈不受限 | `calc_donation_limit` | 0 | 4 | 4/4 | — | — | — |
 | `dep.straight_line`<br>固定資產折舊（平均法）的財稅差異：財務耐用年數與稅法耐用年數、殘值不同 | `calc_depreciation_tax_book_difference` | 0 | 3 | 3/3 | — | — | — |
 | `vat.payable`<br>營業稅當期應納或溢付：銷項減進項、不得扣抵的進項、留抵 | `calc_vat_payable` | 0 | 8 | 8/8 | — | — | 只給整期銷售額時的銷項稅額進位；新設立營業人的第一期期間；電子發票小規模門檻 |
-| `overtime.weekday`<br>平日延長工時加班費：前 2 小時 4/3、其後 5/3 | `calc_overtime_pay` | 2 | 5 | 7/7 | — | — | — |
+| `overtime.weekday`<br>平日延長工時加班費：前 2 小時 4/3、其後 5/3 | `calc_overtime_pay` | 2 | 6 | 8/8 | — | — | — |
 | `overtime.rest_day`<br>休息日出勤：前 2 小時 4/3、第 3 至 8 小時 5/3、第 9 小時起 8/3（依實際出勤時數計，勞動部試算系統未滿 4 小時不補足 4 小時） | `calc_overtime_pay` | 4 | 5 | 9/9 | — | 例外 | — |
 | `overtime.holiday`<br>國定假日出勤：8 小時內加給 1 日工資，延長工時照平日加給 | `calc_overtime_pay` | 2 | 4 | 6/6 | — | 邊界值、例外 | — |
 | `overtime.regular_day_off_disaster`<br>例假因天災、事變、突發事件出勤：工資加倍並補假 | `calc_overtime_pay` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
@@ -59,12 +59,12 @@
 | `ins.part_time`<br>部分工時：勞保照最低級距投保 | `calc_labor_health_insurance` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
 | `ins.health_dependents`<br>健保眷屬人數（本人加眷屬最多計 3 口）與雇主平均眷口數 | `calc_labor_health_insurance` | 3 | 1 | 4/4 | 232 | 例外 | 公民營事業受僱者以外的身分別（工會會員 60%、雇主 100%、公務人員 70%、私校教職員 35%、投保單位負擔 0%） |
 | `ins.pension_voluntary`<br>勞退雇主提繳 6% 與勞工自願提繳 1%～6% | `calc_labor_health_insurance` | 1 | 1 | 2/2 | — | 邊界值、例外 | — |
-| `leave.days`<br>特休日數（週年制）：滿 6 個月、1、2、3、5、10 年的日數 | `calc_annual_leave` | 6 | 5 | 11/11 | — | 例外 | — |
+| `leave.days`<br>特休日數（週年制）：滿 6 個月、1、2、3、5、10 年的日數 | `calc_annual_leave` | 10 | 5 | 15/15 | — | 例外 | — |
 | `leave.unused_payout`<br>未休特休折發工資：日工資 × 未休日數 | `calc_annual_leave` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
-| `sev.new_system`<br>新制資遣費：每滿 1 年給 1/2 個月平均工資、未滿 1 年比例計、最高 6 個月 | `calc_severance` | 4 | 4 | 8/8 | — | — | — |
-| `sev.old_new_mixed`<br>新舊制並存：舊制每年 1 個月、未滿 1 個月以 1 個月計，新制每年 1/2 個月 | `calc_severance` | 4 | 1 | 5/5 | — | 一般 | 舊制年資：全部工作年資滿 25 年（符合勞基法第 53 條自請退休）；工作 10 年以上年滿 60 歲、15 年以上年滿 55 歲的退休條件 |
+| `sev.new_system`<br>新制資遣費：每滿 1 年給 1/2 個月平均工資、未滿 1 年比例計、最高 6 個月 | `calc_severance` | 5 | 4 | 9/9 | — | — | — |
+| `sev.old_new_mixed`<br>新舊制並存：舊制每年 1 個月、未滿 1 個月以 1 個月計，新制每年 1/2 個月 | `calc_severance` | 5 | 1 | 6/6 | — | — | 舊制年資：全部工作年資滿 25 年（符合勞基法第 53 條自請退休）；工作 10 年以上年滿 60 歲、15 年以上年滿 55 歲的退休條件 |
 | `sev.average_wage`<br>平均工資：最近 6 個月工資總額除以日數乘 30 | `calc_severance` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
-| `sev.notice`<br>預告期與預告工資：3 個月以上 10 日、1 年以上 20 日、3 年以上 30 日 | `calc_severance` | 0 | 2 | 2/2 | — | 例外 | — |
+| `sev.notice`<br>預告期與預告工資：3 個月以上 10 日、1 年以上 20 日、3 年以上 30 日 | `calc_severance` | 2 | 3 | 5/5 | — | — | — |
 | `pit.salary_only`<br>單身薪資所得：免稅額、標準扣除額、薪資特別扣除額與級距 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
 | `pit.household`<br>夫妻與受扶養親屬：三種計稅方式擇優（合併、薪資分開、各類分開） | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
 | `pit.dividend`<br>股利：合併 8.5% 可抵減（上限 8 萬）或分開 28% | `calc_personal_income_tax` | 0 | 2 | 2/2 | — | 邊界值、例外 | — |
@@ -87,6 +87,7 @@
 |---|---|---|---|---|---|
 | 勞工保險保險費分擔金額表（勞保普通事故 11.5%＋就業保險 1%，115 年 1 月 1 日起）：28 級的勞工自付與單位負擔 | `ins.full_month` | [勞動部勞工保險局「勞工保險保險費分擔金額表」（政府資料開放平臺，JSON 下載 A17000000J-020015-t0a）](https://data.gov.tw/dataset/6259) | 2026-10-15 | 28 | 28/28 |
 | 全民健康保險保險費負擔金額表（公、民營事業、機構及有一定雇主之受僱者，115 年 1 月 1 日起）：58 級 × 眷屬 0 至 3 人，本人（含眷屬）自付與投保單位負擔 | `ins.health_dependents` | [衛生福利部中央健康保險署「保險費負擔金額表（三）」](https://www.nhi.gov.tw/ch/cp-19418-9eefb-2576-1.html) | 2026-10-15 | 232 | 232/232 |
+| 115 年度薪資所得扣繳稅額表：月薪 80,001～500,000（每 500 元一級，840 級）× 配偶及受扶養親屬人數 0～11（12 欄），居住者每月薪資、已填免稅額申報表（查表） | `wht.salary_monthly` | [115 年度薪資所得扣繳稅額表（財政部賦稅署，114-12-04 台財稅字第 11404675280 號函；附件 1，25 頁）](https://www.dot.gov.tw/download/52040e15e8df4b74a7d8c5188620a35c) | 2026-10-15 | 10080 | 10080/10080 |
 
 ## 沒通過的案例
 
