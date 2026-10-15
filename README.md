@@ -29,80 +29,6 @@ Summa 免費會計助手是會計、稅務、薪資的專業助手，也是讓 A
 - 只測了 Claude；ChatGPT 等其他模型沒有實測。
 - 題目、標準答案與逐題作答不公開。
 
-## 能做什麼
-
-**MCP 本身（25 支工具）**
-
-| 工具 | 做什麼 |
-|---|---|
-| `bookkeeping_guide` | 記帳做法：分錄範本、會計科目、統一發票作廢與折讓、401、期末調整，以及常見判斷與函釋（附字號與條號）；每題第一步先查，並建議接著查哪支工具 |
-| `payroll_guide` | 薪資做法：每小時工資額怎麼算、加班與休息日、國定假日、例假與天災停班（颱風假）、工時上限、補休、最低工資、勞保健保勞退、二代健保、特休、資遣與預告、請假與產假；薪資類題目第一步先查，並建議接著用哪支試算 |
-| `personal_tax_guide` | 個人綜合所得稅做法：所得年度與申報、扶養、夫妻三種計稅方式、各類所得、免稅額、標準或列舉、特別扣除額與排富、基本生活費差額、股利 8.5% 或 28%、退職所得、個人基本稅額、常見錯誤；個人報稅的題目第一步先查 |
-| `calc_personal_income_tax` | 綜所稅試算（114、115 年度）：照財政部公告算免稅額、扣除額、基本生活費差額與級距，夫妻三種計稅方式 × 股利兩種全部算出、標出最低的；回每一步的算式與參數出處 |
-| `property_tax_guide` | 不動產的稅與遺產稅、贈與稅做法：房地合一（新舊制、持有期間稅率、漲價總數額、自住 400 萬、申報）、土地增值稅（速算、長期持有減徵、自用住宅與一生一屋、重購退稅）、地價稅累進、房屋稅 2.0 與各縣市稅率、契稅、遺產稅與贈與稅的免稅額扣除額級距、紅單與預售屋；這類題目第一步先查 |
-| `get_tax_parameter`、`list_tax_parameters` | 某一天有效的稅率、級距、門檻、限額比例，附生效期間與法源 |
-| `filing_calendar` | 某一年的申報與繳納期限，已套用政府辦公日曆的假日順延 |
-| `lookup_code` | 扣繳所得類別、營業稅課稅別與 401 格式代號、商業會計項目表 112 與 117 年度兩版對照、各縣市房屋稅率、土地增值稅用的物價指數 |
-| `list_laws`、`topic_map`、`search_law`、`get_article` | 63 部法規全文；依主題找該查哪幾條；關鍵字搜尋；讀一條原文（條號可寫「第二十四條之三」「24-3」） |
-| `calc_overtime_pay` | 平日加班、休息日、國定假日、例假（天災）出勤的工資，照勞動部加班費試算器的算法（倍率用分數、無條件進位到元） |
-| `calc_labor_health_insurance` | 勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔，直接用勞保局、健保署 115 年的官方金額表；到職、離職當月按日計；職災保險費可帶行業類別編號（`industry_code`，查表 `lookup_code occupational_industry_rate`）或直接帶費率，職災投保薪資用職災自己的分級表（`lookup_code occupational_insurance_grade`，可用 `occupational_insured_salary` 直接指定） |
-| `calc_annual_leave` | 特休天數（週年制、部分工時比例）與未休折發 |
-| `calc_severance` | 平均工資、新舊制資遣費、預告期與預告工資，照勞動部資遣費試算器的算法 |
-| `calc_withholding_and_nhi_supplement` | 一筆給付的扣繳稅額、二代健保補充保費、實付金額 |
-| `calc_business_income_tax` | 營利事業所得稅 |
-| `calc_entertainment_expense_limit` | 交際費限額 |
-| `calc_donation_limit` | 捐贈限額（損費帶 `expenses_and_losses_excl_donations`，不含任何捐贈；或直接帶 `income_before_donation`。舊欄位 `expenses_and_losses` 照舊義仍可用，回應會提醒改名） |
-| `calc_depreciation_tax_book_difference` | 平均法折舊的財稅差異 |
-| `calc_vat_payable` | 一期營業稅：本期應納與留抵下期 |
-| `foreign_per_diem` | 國外出差日支數額（主計總處數額表，美元／日）；帶出差日期就回那一天的金額，分季的自動挑 |
-| `get_data_version` | 資料版本與查證日 |
-
-- 查舊年度也行：帶日期就回那一天有效的值（例：2025 年的基本工資）。
-- 試算回每一步算式與用到的參數（出處、生效日）。
-- 查不到官方原文的標「待查」，不給猜測的值。
-
-## 用在哪裡
-
-| 用法 | 怎麼接 | 例 |
-|---|---|---|
-| 自己用 | 裝進 Claude、ChatGPT 或 Claude Code，直接用中文問 | 老闆、會計、記帳士問「這筆怎麼記」「扣繳多少」「期限哪天」 |
-| 強化 AI 會計工作流 | 讓 AI agent 在記帳、對帳、月結流程裡查記法與數字，接上你的帳務系統，任何帳務系統都可以接。 | agent 整理憑證後產生傳票草稿，科目與稅額先查過再交會計審核 |
-| 放進你的產品 | 把 MCP 工具轉成 function tool，和你自己的工具一起給模型用（見下面的範例） | 電商後台把平台撥款做成傳票草稿；SaaS 的報帳功能自動判斷扣繳與補充保費 |
-| 事務所內部助理 | 記帳士、會計師事務所的 AI 助理接上這個 MCP | 查函釋與條號、算期限、核對客戶問題的數字 |
-| 客服與說明 | POS、金流、電子發票、記帳軟體的客服機器人 | 回答「作廢發票怎麼報」「沒有銷售額也要申報嗎」，附法條出處 |
-| 批次檢查 | 定期跑一個檢查用的 agent | 檢查傳票借貸、發票開立時點、扣繳類別與稅率是否正確 |
-| 開發會計功能 | 工程師用 Claude Code 寫程式時查規則 | 寫扣繳或營業稅功能時，查現行稅率、門檻與法條 |
-
-### 範例：放進你的產品（function tool）
-
-[`examples/saas_voucher_draft.py`](examples/saas_voucher_draft.py) 是一個電商 SaaS 後台的例子：你自己的撥款資料是一支 function tool，Summa 的工具透過 Anthropic Python SDK 的 MCP 轉換，也變成 function tool，模型一起使用，產出傳票草稿交給會計審核。
-
-```python
-@beta_async_tool
-async def get_payout(payout_id: str) -> str:
-    """讀取電商平台的撥款明細（訂單金額、平台手續費、實際撥款）。"""
-    ...  # 從你的資料庫或平台 API 讀
-
-async with streamable_http_client("https://mcp.summa.com.tw/mcp") as (read, write):
-    async with ClientSession(read, write) as mcp:
-        await mcp.initialize()
-        summa_tools = [async_mcp_tool(t, mcp) for t in (await mcp.list_tools()).tools]
-        runner = client.beta.messages.tool_runner(
-            model="claude-opus-5-5",
-            max_tokens=16000,
-            system=SYSTEM,  # 記法與數字先查 Summa 工具；草稿交會計審核
-            tools=[get_payout, *summa_tools],
-            messages=[{"role": "user", "content": "撥款單 P-20261015-001 入帳了，幫我做傳票草稿。"}],
-        )
-        async for message in runner:
-            ...
-```
-
-- 需要 Python 3.10 以上、`pip install "anthropic[mcp]"`、你自己的 `ANTHROPIC_API_KEY`。
-- 不想自己處理工具呼叫，也可以用 Claude API 的 MCP 連接器：請求帶 `mcp_servers`（網址填上面那個）加一個 `mcp_toolset`，由 Anthropic 代為連線。
-- 其他模型（例如 OpenAI）也一樣：用 MCP 用戶端取得工具清單，轉成該家的 function 定義，模型要呼叫時轉給這個 MCP。
-- 模型給的是草稿：入帳、申報前由會計或記帳士確認。
-
 ## 安裝
 
 最快的方法：把這個 repo 的網址貼給你的 AI（Claude、Claude Code 或 ChatGPT），跟它說「幫我裝這個」，它會照 [INSTALL.md](INSTALL.md) 的步驟做，需要你按的地方會一步一步告訴你。
@@ -162,6 +88,48 @@ claude mcp add --transport http summa-tw-accounting https://mcp.summa.com.tw/mcp
 | 特休、資遣、預告、請假與產假 | 「年資 2 年 5 個月 12 天、平均工資 48,000，資遣費多少？」 | `payroll_guide`、`calc_annual_leave`、`calc_severance` |
 
 **不適用**：函釋與個案判斷（例：移轉訂價、境外勞務、平台分潤、講師費該歸哪一類）只給有條件的結論，也就是「事實是 A 時怎樣、是 B 時怎樣」，並列出要補的事實。查詢與試算結果不構成法律或稅務意見，正式申報以你的記帳士、會計師與主管機關為準。
+
+## 用在哪裡
+
+| 用法 | 怎麼接 | 例 |
+|---|---|---|
+| 自己用 | 裝進 Claude、ChatGPT 或 Claude Code，直接用中文問 | 老闆、會計、記帳士問「這筆怎麼記」「扣繳多少」「期限哪天」 |
+| 強化 AI 會計工作流 | 讓 AI agent 在記帳、對帳、月結流程裡查記法與數字，接上你的帳務系統，任何帳務系統都可以接。 | agent 整理憑證後產生傳票草稿，科目與稅額先查過再交會計審核 |
+| 放進你的產品 | 把 MCP 工具轉成 function tool，和你自己的工具一起給模型用（見下面的範例） | 電商後台把平台撥款做成傳票草稿；SaaS 的報帳功能自動判斷扣繳與補充保費 |
+| 事務所內部助理 | 記帳士、會計師事務所的 AI 助理接上這個 MCP | 查函釋與條號、算期限、核對客戶問題的數字 |
+| 客服與說明 | POS、金流、電子發票、記帳軟體的客服機器人 | 回答「作廢發票怎麼報」「沒有銷售額也要申報嗎」，附法條出處 |
+| 批次檢查 | 定期跑一個檢查用的 agent | 檢查傳票借貸、發票開立時點、扣繳類別與稅率是否正確 |
+| 開發會計功能 | 工程師用 Claude Code 寫程式時查規則 | 寫扣繳或營業稅功能時，查現行稅率、門檻與法條 |
+
+### 範例：放進你的產品（function tool）
+
+[`examples/saas_voucher_draft.py`](examples/saas_voucher_draft.py) 是一個電商 SaaS 後台的例子：你自己的撥款資料是一支 function tool，Summa 的工具透過 Anthropic Python SDK 的 MCP 轉換，也變成 function tool，模型一起使用，產出傳票草稿交給會計審核。
+
+```python
+@beta_async_tool
+async def get_payout(payout_id: str) -> str:
+    """讀取電商平台的撥款明細（訂單金額、平台手續費、實際撥款）。"""
+    ...  # 從你的資料庫或平台 API 讀
+
+async with streamable_http_client("https://mcp.summa.com.tw/mcp") as (read, write):
+    async with ClientSession(read, write) as mcp:
+        await mcp.initialize()
+        summa_tools = [async_mcp_tool(t, mcp) for t in (await mcp.list_tools()).tools]
+        runner = client.beta.messages.tool_runner(
+            model="claude-opus-5-5",
+            max_tokens=16000,
+            system=SYSTEM,  # 記法與數字先查 Summa 工具；草稿交會計審核
+            tools=[get_payout, *summa_tools],
+            messages=[{"role": "user", "content": "撥款單 P-20261015-001 入帳了，幫我做傳票草稿。"}],
+        )
+        async for message in runner:
+            ...
+```
+
+- 需要 Python 3.10 以上、`pip install "anthropic[mcp]"`、你自己的 `ANTHROPIC_API_KEY`。
+- 不想自己處理工具呼叫，也可以用 Claude API 的 MCP 連接器：請求帶 `mcp_servers`（網址填上面那個）加一個 `mcp_toolset`，由 Anthropic 代為連線。
+- 其他模型（例如 OpenAI）也一樣：用 MCP 用戶端取得工具清單，轉成該家的 function 定義，模型要呼叫時轉給這個 MCP。
+- 模型給的是草稿：入帳、申報前由會計或記帳士確認。
 
 ## 會計依據與準則
 
@@ -230,6 +198,38 @@ claude mcp add --transport http summa-tw-accounting https://mcp.summa.com.tw/mcp
 - 個案的延期、展延核准不在申報日曆裡。
 - 查詢與試算結果不構成法律或稅務意見，也不代替申報。
 - 每個 IP 每分鐘約 180 次工具呼叫（連線與列工具不計），超過大量時回 429，並寫明稍後再試。
+
+## 能做什麼
+
+**MCP 本身（25 支工具）**
+
+| 工具 | 做什麼 |
+|---|---|
+| `bookkeeping_guide` | 記帳做法：分錄範本、會計科目、統一發票作廢與折讓、401、期末調整，以及常見判斷與函釋（附字號與條號）；每題第一步先查，並建議接著查哪支工具 |
+| `payroll_guide` | 薪資做法：每小時工資額怎麼算、加班與休息日、國定假日、例假與天災停班（颱風假）、工時上限、補休、最低工資、勞保健保勞退、二代健保、特休、資遣與預告、請假與產假；薪資類題目第一步先查，並建議接著用哪支試算 |
+| `personal_tax_guide` | 個人綜合所得稅做法：所得年度與申報、扶養、夫妻三種計稅方式、各類所得、免稅額、標準或列舉、特別扣除額與排富、基本生活費差額、股利 8.5% 或 28%、退職所得、個人基本稅額、常見錯誤；個人報稅的題目第一步先查 |
+| `calc_personal_income_tax` | 綜所稅試算（114、115 年度）：照財政部公告算免稅額、扣除額、基本生活費差額與級距，夫妻三種計稅方式 × 股利兩種全部算出、標出最低的；回每一步的算式與參數出處 |
+| `property_tax_guide` | 不動產的稅與遺產稅、贈與稅做法：房地合一（新舊制、持有期間稅率、漲價總數額、自住 400 萬、申報）、土地增值稅（速算、長期持有減徵、自用住宅與一生一屋、重購退稅）、地價稅累進、房屋稅 2.0 與各縣市稅率、契稅、遺產稅與贈與稅的免稅額扣除額級距、紅單與預售屋；這類題目第一步先查 |
+| `get_tax_parameter`、`list_tax_parameters` | 某一天有效的稅率、級距、門檻、限額比例，附生效期間與法源 |
+| `filing_calendar` | 某一年的申報與繳納期限，已套用政府辦公日曆的假日順延 |
+| `lookup_code` | 扣繳所得類別、營業稅課稅別與 401 格式代號、商業會計項目表 112 與 117 年度兩版對照、各縣市房屋稅率、土地增值稅用的物價指數 |
+| `list_laws`、`topic_map`、`search_law`、`get_article` | 63 部法規全文；依主題找該查哪幾條；關鍵字搜尋；讀一條原文（條號可寫「第二十四條之三」「24-3」） |
+| `calc_overtime_pay` | 平日加班、休息日、國定假日、例假（天災）出勤的工資，照勞動部加班費試算器的算法（倍率用分數、無條件進位到元） |
+| `calc_labor_health_insurance` | 勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔，直接用勞保局、健保署 115 年的官方金額表；到職、離職當月按日計；職災保險費可帶行業類別編號（`industry_code`，查表 `lookup_code occupational_industry_rate`）或直接帶費率，職災投保薪資用職災自己的分級表（`lookup_code occupational_insurance_grade`，可用 `occupational_insured_salary` 直接指定） |
+| `calc_annual_leave` | 特休天數（週年制、部分工時比例）與未休折發 |
+| `calc_severance` | 平均工資、新舊制資遣費、預告期與預告工資，照勞動部資遣費試算器的算法 |
+| `calc_withholding_and_nhi_supplement` | 一筆給付的扣繳稅額、二代健保補充保費、實付金額 |
+| `calc_business_income_tax` | 營利事業所得稅 |
+| `calc_entertainment_expense_limit` | 交際費限額 |
+| `calc_donation_limit` | 捐贈限額（損費帶 `expenses_and_losses_excl_donations`，不含任何捐贈；或直接帶 `income_before_donation`。舊欄位 `expenses_and_losses` 照舊義仍可用，回應會提醒改名） |
+| `calc_depreciation_tax_book_difference` | 平均法折舊的財稅差異 |
+| `calc_vat_payable` | 一期營業稅：本期應納與留抵下期 |
+| `foreign_per_diem` | 國外出差日支數額（主計總處數額表，美元／日）；帶出差日期就回那一天的金額，分季的自動挑 |
+| `get_data_version` | 資料版本與查證日 |
+
+- 查舊年度也行：帶日期就回那一天有效的值（例：2025 年的基本工資）。
+- 試算回每一步算式與用到的參數（出處、生效日）。
+- 查不到官方原文的標「待查」，不給猜測的值。
 
 ## 工具規格
 
