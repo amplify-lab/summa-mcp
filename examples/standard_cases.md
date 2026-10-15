@@ -1,6 +1,6 @@
 # 標準案例範例
 
-151 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+159 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -34,6 +34,13 @@
 | cit_03 | 減半規則：課稅所得額 150,000 元 | taxable_income 150000 | tax_payable 15000 | 所得稅法第 5 條第 5 項 | 自行設計 |
 | cit_04 | 邊界：課稅所得額 200,000 元（A、B 相等） | taxable_income 200000 | tax_payable 40000 | 所得稅法第 5 條第 5 項 | 自行設計 |
 | cit_05 | 一般：課稅所得額 1,000,000 元 | taxable_income 1000000 | tax_payable 200000 | 所得稅法第 5 條第 5 項 | 自行設計 |
+| cit_off_01 | 官方試算頁：課稅所得額 120,000（起徵額邊界）→ 免徵 | taxable_income 120000 | result {"tax_payable":0} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_02 | 官方試算頁：課稅所得額 200,000（半數規定與 20% 的交界）→ 40,000 | taxable_income 200000 | result {"tax_payable":40000} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_03 | 官方試算頁：課稅所得額 200,001（剛過交界）→ 40,000 | taxable_income 200001 | result {"tax_payable":40000} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_04 | 官方試算頁：損益六步驟串到課稅所得額 500,000 → 100,000 | taxable_income 500000 | result {"tax_payable":100000} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_05 | 官方試算頁：課稅所得額 120,001（剛過起徵額）→ 0（公式值 0.5 捨去） | taxable_income 120001 | result {"tax_payable":0} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_06 | 官方試算頁：課稅所得額 175,555 → 27,777（公式值 27,777.5 捨去） | taxable_income 175555 | result {"tax_payable":27777} | 所得稅法第 5 條第 5 項 | 官方 |
+| cit_off_07 | 官方試算頁：課稅所得額 1,333,333 → 266,666（公式值 266,666.6 捨去） | taxable_income 1333333 | result {"tax_payable":266666} | 所得稅法第 5 條第 5 項 | 官方 |
 
 ## `calc_depreciation_tax_book_difference`
 
@@ -42,6 +49,7 @@
 | dep_01 | 一般：整年取得，財務 3 年、稅法 5 年，無殘值 | cost 1200000、book_salvage 0、tax_salvage 0、book_life_years 3、tax_life_years 5、method straight_line、acquired_on 2026-01-01 | schedule [{"year":2026,"book_depreciation":400000,"tax_depreciation":240000,"difference":-160000,"cumulative_temporary_difference":-160000},{"year":2027,"book_depreciation":400000,"tax_depreciation":240000,"difference":-160000,"cumulative_temporary_difference":-320000},{"year":2028,"book_depreciation":400000,"tax_depreciation":240000,"difference":-160000,"cumulative_temporary_difference":-480000},{"year":2029,"book_depreciation":0,"tax_depreciation":240000,"difference":240000,"cumulative_temporary_difference":-240000},{"year":2030,"book_depreciation":0,"tax_depreciation":240000,"difference":240000,"cumulative_temporary_difference":0}] | 所得稅法第 51 條、第 54 條；營利事業所得稅查核準則第 95 條第 6 款、第 7 款 | 自行設計 |
 | dep_02 | 邊界：7 月 1 日取得，取得當年與最後一年按月計，殘值 100,000 | cost 1000000、book_salvage 100000、tax_salvage 100000、book_life_years 4、tax_life_years 5、method straight_line、acquired_on 2026-07-01 | schedule [{"year":2026,"book_depreciation":112500,"tax_depreciation":90000,"difference":-22500,"cumulative_temporary_difference":-22500},{"year":2027,"book_depreciation":225000,"tax_depreciation":180000,"difference":-45000,"cumulative_temporary_difference":-67500},{"year":2028,"book_depreciation":225000,"tax_depreciation":180000,"difference":-45000,"cumulative_temporary_difference":-112500},{"year":2029,"book_depreciation":225000,"tax_depreciation":180000,"difference":-45000,"cumulative_temporary_difference":-157500},{"year":2030,"book_depreciation":112500,"tax_depreciation":180000,"difference":67500,"cumulative_temporary_difference":-90000},{"year":2031,"book_depreciation":0,"tax_depreciation":90000,"difference":90000,"cumulative_temporary_difference":0}] | 所得稅法第 51 條、第 54 條；營利事業所得稅查核準則第 95 條第 6 款、第 7 款 | 自行設計 |
 | dep_03 | 例外：財稅殘值不同（財務預估殘值 50,000，稅上以無殘值計） | cost 500000、book_salvage 50000、tax_salvage 0、book_life_years 5、tax_life_years 5、method straight_line、acquired_on 2026-01-01 | schedule [{"year":2026,"book_depreciation":90000,"tax_depreciation":100000,"difference":10000,"cumulative_temporary_difference":10000},{"year":2027,"book_depreciation":90000,"tax_depreciation":100000,"difference":10000,"cumulative_temporary_difference":20000},{"year":2028,"book_depreciation":90000,"tax_depreciation":100000,"difference":10000,"cumulative_temporary_difference":30000},{"year":2029,"book_depreciation":90000,"tax_depreciation":100000,"difference":10000,"cumulative_temporary_difference":40000},{"year":2030,"book_depreciation":90000,"tax_depreciation":100000,"difference":10000,"cumulative_temporary_difference":50000}] | 所得稅法第 51 條、第 54 條；營利事業所得稅查核準則第 95 條第 6 款、第 7 款 | 自行設計 |
+| dep_04 | 對照財政部 87 年令例一的年折舊額：成本 550,000、殘值 50,000、8 年平均法，每年 62,500 | cost 550000、book_salvage 50000、tax_salvage 50000、book_life_years 8、tax_life_years 8、method straight_line、acquired_on 1998-01-01 | result {"schedule":[{"year":1998,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":1999,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2000,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2001,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2002,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2003,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2004,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0},{"year":2005,"book_depreciation":62500,"tax_depreciation":62500,"difference":0,"cumulative_temporary_difference":0}]} | 營利事業所得稅查核準則第 95 條；財政部 87 年 2 月 26 日台財稅字第 871929671 號令「固定資產剩餘年數之換算及新表適用期限補充規定」 | 自行設計 |
 
 ## `calc_donation_limit`
 

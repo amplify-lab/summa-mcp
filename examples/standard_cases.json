@@ -5267,6 +5267,261 @@
    "source_url": "https://www.etax.nat.gov.tw/etwmain/api/functions/etw212w/download/189b50a490600000c0cddfef1a752804/%E7%87%9F%E6%A5%AD%E4%BA%BA%E9%8A%B7%E5%94%AE%E9%A1%8D%E8%88%87%E7%A8%85%E9%A1%8D%E7%94%B3%E5%A0%B1%E6%9B%B8%E5%8F%8A%E8%AA%AA%E6%98%8E%E6%AC%84(401%E3%80%81403%E5%8F%8A404)A4%E6%A0%BC%E5%BC%8F.pdf",
    "retrieved_at": "2026-10-15",
    "effective_date": "2026-10-03"
+  },
+  {
+   "id": "dep_04",
+   "tool": "calc_depreciation_tax_book_difference",
+   "rule": "dep.straight_line",
+   "name": "對照財政部 87 年令例一的年折舊額：成本 550,000、殘值 50,000、8 年平均法，每年 62,500",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "cost": 550000,
+    "book_salvage": 50000,
+    "tax_salvage": 50000,
+    "book_life_years": 8,
+    "tax_life_years": 8,
+    "method": "straight_line",
+    "acquired_on": "1998-01-01"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "schedule": [
+       {
+        "year": 1998,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 1999,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2000,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2001,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2002,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2003,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2004,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       },
+       {
+        "year": 2005,
+        "book_depreciation": 62500,
+        "tax_depreciation": 62500,
+        "difference": 0,
+        "cumulative_temporary_difference": 0
+       }
+      ]
+     }
+    }
+   },
+   "legal_basis": "營利事業所得稅查核準則第 95 條；財政部 87 年 2 月 26 日台財稅字第 871929671 號令「固定資產剩餘年數之換算及新表適用期限補充規定」",
+   "source_url": "https://law-out.mof.gov.tw/LawContent.aspx?id=FL036548",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "1998-01-01"
+  },
+  {
+   "id": "cit_off_01",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 120,000（起徵額邊界）→ 免徵",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 120000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 0
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_02",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 200,000（半數規定與 20% 的交界）→ 40,000",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 200000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 40000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_03",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 200,001（剛過交界）→ 40,000",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 200001
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 40000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_04",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：損益六步驟串到課稅所得額 500,000 → 100,000",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 500000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 100000
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_05",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 120,001（剛過起徵額）→ 0（公式值 0.5 捨去）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 120001
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 0
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_06",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 175,555 → 27,777（公式值 27,777.5 捨去）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 175555
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 27777
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
+  },
+  {
+   "id": "cit_off_07",
+   "tool": "calc_business_income_tax",
+   "rule": "cit.rate",
+   "name": "官方試算頁：課稅所得額 1,333,333 → 266,666（公式值 266,666.6 捨去）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "taxable_income": 1333333
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "tax_payable": 266666
+     }
+    }
+   },
+   "legal_basis": "所得稅法第 5 條第 5 項",
+   "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
+   "retrieved_at": "2026-10-16",
+   "effective_date": "2025-12-31"
   }
  ]
 }
