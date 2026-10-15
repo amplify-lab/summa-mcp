@@ -10,26 +10,26 @@
 |---|---|
 | 試算工具（`calc_` 開頭） | 11 支 |
 | 有標準案例的試算工具 | 11 支 |
-| 規則 | 38 條 |
-| 標準案例 | 104 個 |
-| 官方案例 | 15 個（通過 15/15） |
+| 規則 | 39 條 |
+| 標準案例 | 132 個 |
+| 官方案例 | 43 個（通過 43/43） |
 | 自行設計案例 | 89 個（通過 89/89） |
-| 可放對外範例（`public: true`） | 93 個 |
+| 可放對外範例（`public: true`） | 121 個 |
 | 官方表格比對 | 2 張表、260 列（通過 260/260） |
 
 ## 每支試算工具
 
 | 工具 | 規則 | 官方案例 | 自行設計案例 | 通過 | 說明 |
 |---|---|---|---|---|---|
-| `calc_annual_leave` | 2 | 0 | 6 | 6/6 |  |
+| `calc_annual_leave` | 2 | 6 | 6 | 12/12 |  |
 | `calc_business_income_tax` | 1 | 0 | 5 | 5/5 |  |
 | `calc_depreciation_tax_book_difference` | 1 | 0 | 3 | 3/3 |  |
 | `calc_donation_limit` | 1 | 0 | 4 | 4/4 |  |
 | `calc_entertainment_expense_limit` | 1 | 0 | 5 | 5/5 |  |
-| `calc_labor_health_insurance` | 5 | 5 | 8 | 13/13 |  |
-| `calc_overtime_pay` | 4 | 0 | 15 | 15/15 |  |
+| `calc_labor_health_insurance` | 6 | 11 | 8 | 19/19 |  |
+| `calc_overtime_pay` | 4 | 8 | 15 | 23/23 |  |
 | `calc_personal_income_tax` | 9 | 0 | 11 | 11/11 |  |
-| `calc_severance` | 4 | 0 | 8 | 8/8 |  |
+| `calc_severance` | 4 | 8 | 8 | 16/16 |  |
 | `calc_vat_payable` | 1 | 0 | 8 | 8/8 |  |
 | `calc_withholding_and_nhi_supplement` | 9 | 10 | 16 | 26/26 |  |
 
@@ -50,19 +50,19 @@
 | `don.limit`<br>營利事業捐贈列支限額：收益減損費後的比例；對政府捐贈不受限 | `calc_donation_limit` | 0 | 4 | 4/4 | — | — | — |
 | `dep.straight_line`<br>固定資產折舊（平均法）的財稅差異：財務耐用年數與稅法耐用年數、殘值不同 | `calc_depreciation_tax_book_difference` | 0 | 3 | 3/3 | — | — | — |
 | `vat.payable`<br>營業稅當期應納或溢付：銷項減進項、不得扣抵的進項、留抵 | `calc_vat_payable` | 0 | 8 | 8/8 | — | — | 只給整期銷售額時的銷項稅額進位；新設立營業人的第一期期間；電子發票小規模門檻 |
-| `overtime.weekday`<br>平日延長工時加班費：前 2 小時 4/3、其後 5/3 | `calc_overtime_pay` | 0 | 5 | 5/5 | — | — | — |
-| `overtime.rest_day`<br>休息日出勤：前 2 小時 4/3、第 3 至 8 小時 5/3、第 9 小時起 8/3；不足 4 小時以 4 小時計 | `calc_overtime_pay` | 0 | 5 | 5/5 | — | 例外 | — |
-| `overtime.holiday`<br>國定假日出勤：8 小時內加給 1 日工資，延長工時照平日加給 | `calc_overtime_pay` | 0 | 4 | 4/4 | — | 邊界值、例外 | — |
+| `overtime.weekday`<br>平日延長工時加班費：前 2 小時 4/3、其後 5/3 | `calc_overtime_pay` | 2 | 5 | 7/7 | — | — | — |
+| `overtime.rest_day`<br>休息日出勤：前 2 小時 4/3、第 3 至 8 小時 5/3、第 9 小時起 8/3（依實際出勤時數計，勞動部試算系統未滿 4 小時不補足 4 小時） | `calc_overtime_pay` | 4 | 5 | 9/9 | — | 例外 | — |
+| `overtime.holiday`<br>國定假日出勤：8 小時內加給 1 日工資，延長工時照平日加給 | `calc_overtime_pay` | 2 | 4 | 6/6 | — | 邊界值、例外 | — |
 | `overtime.regular_day_off_disaster`<br>例假因天災、事變、突發事件出勤：工資加倍並補假 | `calc_overtime_pay` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
-| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 0 | 3 | 3/3 | 28 | 例外 | — |
-| `ins.prorate_days`<br>到職或退保當月按投保日數計（勞保、就保、職災按日；健保、勞退依規則） | `calc_labor_health_insurance` | 1 | 2 | 3/3 | — | 一般、邊界值 | — |
+| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 3 | 3 | 6/6 | 28 | 例外 | 被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免；115 年度以前年度、非 11.5% 的普通事故費率 |
+| `ins.prorate_days`<br>到職或退保當月按投保日數計（勞保、就保、職災按日；健保、勞退依規則） | `calc_labor_health_insurance` | 3 | 2 | 5/5 | — | 一般、邊界值 | — |
 | `ins.part_time`<br>部分工時：勞保照最低級距投保 | `calc_labor_health_insurance` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
 | `ins.health_dependents`<br>健保眷屬人數（本人加眷屬最多計 3 口）與雇主平均眷口數 | `calc_labor_health_insurance` | 3 | 1 | 4/4 | 232 | 例外 | 公民營事業受僱者以外的身分別（工會會員 60%、雇主 100%、公務人員 70%、私校教職員 35%、投保單位負擔 0%） |
 | `ins.pension_voluntary`<br>勞退雇主提繳 6% 與勞工自願提繳 1%～6% | `calc_labor_health_insurance` | 1 | 1 | 2/2 | — | 邊界值、例外 | — |
-| `leave.days`<br>特休日數（週年制）：滿 6 個月、1、2、3、5、10 年的日數 | `calc_annual_leave` | 0 | 5 | 5/5 | — | 例外 | — |
+| `leave.days`<br>特休日數（週年制）：滿 6 個月、1、2、3、5、10 年的日數 | `calc_annual_leave` | 6 | 5 | 11/11 | — | 例外 | — |
 | `leave.unused_payout`<br>未休特休折發工資：日工資 × 未休日數 | `calc_annual_leave` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
-| `sev.new_system`<br>新制資遣費：每滿 1 年給 1/2 個月平均工資、未滿 1 年比例計、最高 6 個月 | `calc_severance` | 0 | 4 | 4/4 | — | — | — |
-| `sev.old_new_mixed`<br>新舊制並存：舊制每年 1 個月、未滿 1 個月以 1 個月計，新制每年 1/2 個月 | `calc_severance` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
+| `sev.new_system`<br>新制資遣費：每滿 1 年給 1/2 個月平均工資、未滿 1 年比例計、最高 6 個月 | `calc_severance` | 4 | 4 | 8/8 | — | — | — |
+| `sev.old_new_mixed`<br>新舊制並存：舊制每年 1 個月、未滿 1 個月以 1 個月計，新制每年 1/2 個月 | `calc_severance` | 4 | 1 | 5/5 | — | 一般 | 舊制年資：全部工作年資滿 25 年（符合勞基法第 53 條自請退休）；工作 10 年以上年滿 60 歲、15 年以上年滿 55 歲的退休條件 |
 | `sev.average_wage`<br>平均工資：最近 6 個月工資總額除以日數乘 30 | `calc_severance` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
 | `sev.notice`<br>預告期與預告工資：3 個月以上 10 日、1 年以上 20 日、3 年以上 30 日 | `calc_severance` | 0 | 2 | 2/2 | — | 例外 | — |
 | `pit.salary_only`<br>單身薪資所得：免稅額、標準扣除額、薪資特別扣除額與級距 | `calc_personal_income_tax` | 0 | 1 | 1/1 | — | 邊界值、例外 | — |
@@ -77,6 +77,7 @@
 | `nhi.interest`<br>利息所得的補充保費：單次給付達 20,000 元起扣、2.11%（不同存單分別判斷） | `calc_withholding_and_nhi_supplement` | 2 | 0 | 2/2 | — | 例外 | — |
 | `nhi.rent`<br>租金收入的補充保費：單次給付達 20,000 元起扣、2.11%（一次付多個月以給付總額計） | `calc_withholding_and_nhi_supplement` | 2 | 0 | 2/2 | — | 例外 | — |
 | `nhi.dividend`<br>股利所得的補充保費：單次給付達 20,000 元起扣、2.11% | `calc_withholding_and_nhi_supplement` | 1 | 0 | 1/1 | — | 邊界值、例外 | 雇主或自營業主身分投保者的股利：可扣除已列入投保金額計算的部分；臺灣存託憑證（TDR）股利（海外所得，不扣補充保費） |
+| `ins.occupational`<br>職災保險費：雇主全額負擔，災保月投保薪資 × 災保費率（行業別費率加上下班 0.07%） | `calc_labor_health_insurance` | 1 | 0 | 1/1 | — | 邊界值、例外 | — |
 
 ## 官方表格比對
 
@@ -111,8 +112,16 @@
 - **新設立營業人的第一期期間**：參數 vat_new_business_first_period 標待查
 - **電子發票小規模門檻**：參數 vat_einvoice_small_scale_threshold 標待查
 
+### `ins.full_month`
+- **被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免**：勞保局試算頁有這些類別與減免；工具只算有一定雇主、參加就保的員工，沒有被保險人類別與身心障礙等級的輸入欄位
+- **115 年度以前年度、非 11.5% 的普通事故費率**：勞保局試算頁可選 95 至 115 年度與 5.5%～11.5% 的費率；工具只收 115 年表（其他年度回 out_of_range「目前收錄 115 年」）
+
 ### `ins.health_dependents`
 - **公民營事業受僱者以外的身分別（工會會員 60%、雇主 100%、公務人員 70%、私校教職員 35%、投保單位負擔 0%）**：健保署公式頁有官方釋例；工具只算公民營事業有一定雇主的受僱者（本人 30%、單位 60%），沒有身分別輸入欄位
+
+### `sev.old_new_mixed`
+- **舊制年資：全部工作年資滿 25 年（符合勞基法第 53 條自請退休）**：照勞動部試算表：舊制部分不算資遣費（`result.old_system.status: retirement_conditions_met`、`severance_total` null、回 `unsupported`），請改用退休金計算；新制部分照算（`new_system_only_total`）。已裁（DISC-001，維護者 10/15）
+- **工作 10 年以上年滿 60 歲、15 年以上年滿 55 歲的退休條件**：工具沒有年齡輸入，只在全部工作年資滿 10 年且有舊制年資時於 notes 提示，數字照算
 
 ### `pit.year_not_announced`
 - **115 年度基本生活費差額**：財政部尚未公告，工具回 null 並提醒（參數 pit_basic_living_expense 標待查）

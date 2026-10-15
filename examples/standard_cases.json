@@ -3560,6 +3560,815 @@
    "source_url": "https://www.bli.gov.tw/0012976.html",
    "retrieved_at": "2026-10-15",
    "effective_date": "2026-02-25"
+  },
+  {
+   "id": "li_off_01",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：勞保與災保都在最低級距 29,500、災保費率 0.22%，整月",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 29500,
+    "occupational_insured_salary": 29500,
+    "industry_rate": 0.0015
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 679,
+      "employer_li_only": 2375,
+      "employee_ei_only": 59,
+      "employer_ei_only": 207,
+      "employer_occupational": 65,
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "li_off_02",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：勞保最高級距 45,800、災保最高級距 72,800、災保費率 0.22%，整月",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 45800,
+    "occupational_insured_salary": 72800,
+    "industry_rate": 0.0015
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 1053,
+      "employer_li_only": 3687,
+      "employee_ei_only": 92,
+      "employer_ei_only": 321,
+      "employer_occupational": 160,
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "li_off_03",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：月投保 36,300、當月只投保 15 日（10/16 到職）、災保費率 0.22%",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 36300,
+    "occupational_insured_salary": 36300,
+    "industry_rate": 0.0015,
+    "start_date": "2026-10-16"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 417,
+      "employer_li_only": 1461,
+      "employee_ei_only": 36,
+      "employer_ei_only": 127,
+      "employer_occupational": 40,
+      "days": 15
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "li_off_04",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.occupational",
+   "name": "一般：投保 40,100、災保費率 0.96%（高風險行業），整月",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 40100,
+    "occupational_insured_salary": 40100,
+    "industry_rate": 0.0089
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 922,
+      "employer_li_only": 3228,
+      "employee_ei_only": 80,
+      "employer_ei_only": 281,
+      "employer_occupational": 385,
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "li_off_05",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：勞保最低級距 11,100（部分工時）、災保照最低級距 29,500、災保費率 0.12%，整月",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 11100,
+    "occupational_insured_salary": 29500,
+    "industry_rate": 0.0005
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 255,
+      "employer_li_only": 894,
+      "employee_ei_only": 22,
+      "employer_ei_only": 78,
+      "employer_occupational": 35,
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "li_off_06",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：月投保 34,800、當月投保 20 日（10/11 到職）、災保費率 0.44%",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "labor_insured_salary": 34800,
+    "occupational_insured_salary": 34800,
+    "industry_rate": 0.0037,
+    "start_date": "2026-10-11"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "employee_li_only": 534,
+      "employer_li_only": 1868,
+      "employee_ei_only": 46,
+      "employer_ei_only": 162,
+      "employer_occupational": 102,
+      "days": 20
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%）",
+   "source_url": "https://www.bli.gov.tw/0014162.html",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_01",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.weekday",
+   "name": "一般：月薪 36,000，平日出勤 10 小時",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 36000,
+    "day_type": "weekday",
+    "hours_worked": 10
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 400
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_02",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.weekday",
+   "name": "邊界：月薪 48,000，平日出勤 12 小時（日工時上限）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 48000,
+    "day_type": "weekday",
+    "hours_worked": 12
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 1200
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_03",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.rest_day",
+   "name": "一般：月薪 36,000，休息日 3 小時（前 2 小時 4/3、第 3 小時 5/3，不足 4 小時不以 4 小時計）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 36000,
+    "day_type": "rest_day",
+    "hours_worked": 3
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 650
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_04",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.rest_day",
+   "name": "邊界：月薪 42,000，休息日 9 小時（第 9 小時起 8/3，進位 2,683.33 → 2,684）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 42000,
+    "day_type": "rest_day",
+    "hours_worked": 9
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 2684
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_05",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.rest_day",
+   "name": "一般：月薪 60,000，休息日 11 小時（進位 5,166.67 → 5,167）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 60000,
+    "day_type": "rest_day",
+    "hours_worked": 11
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 5167
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_06",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.rest_day",
+   "name": "邊界：月薪 36,000，休息日 2 小時",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 36000,
+    "day_type": "rest_day",
+    "hours_worked": 2
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 400
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_07",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.holiday",
+   "name": "一般：月薪 36,000，國定假日出勤 8 小時",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 36000,
+    "day_type": "holiday",
+    "hours_worked": 8
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 1200
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "ot_off_08",
+   "tool": "calc_overtime_pay",
+   "rule": "overtime.holiday",
+   "name": "一般：月薪 42,000，國定假日出勤 10 小時（延長工時照平日加給）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "pay_type": "monthly",
+    "wage": 42000,
+    "day_type": "holiday",
+    "hours_worked": 10
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "extra_pay": 1867
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制）",
+   "source_url": "https://calcr2.mol.gov.tw/Monthly",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_01",
+   "tool": "calc_severance",
+   "rule": "sev.new_system",
+   "name": "一般：全新制，2019-03-01 到職、2026-09-30 資遣，平均工資 60,000（7 年 7 個月）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "new_system_start_date": "2019-03-01",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 60000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 227500
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_02",
+   "tool": "calc_severance",
+   "rule": "sev.new_system",
+   "name": "一般：全新制，2024-08-15 到職、2026-10-31 資遣，平均工資 48,000（2 年 2 個月 17 日）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "new_system_start_date": "2024-08-15",
+    "end_date": "2026-10-31",
+    "average_monthly_wage": 48000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 53134
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_03",
+   "tool": "calc_severance",
+   "rule": "sev.old_new_mixed",
+   "name": "例外：舊制 2002-03-01 起、2005-07-01 轉新制、2026-09-30 資遣，平均工資 62,000（新制達上限 6 個月）",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "old_system_start_date": "2002-03-01",
+    "new_system_start_date": "2005-07-01",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 62000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 578667
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_05",
+   "tool": "calc_severance",
+   "rule": "sev.new_system",
+   "name": "邊界：全新制，2026-02-10 到職、2026-09-30 資遣，平均工資 30,000（未滿 1 年按比例）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "new_system_start_date": "2026-02-10",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 30000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 9625
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_06",
+   "tool": "calc_severance",
+   "rule": "sev.new_system",
+   "name": "一般：全新制，2022-01-01 到職、2026-06-30 資遣，平均工資 45,000（4 年 6 個月）",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "new_system_start_date": "2022-01-01",
+    "end_date": "2026-06-30",
+    "average_monthly_wage": 45000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 101250
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_01",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "一般：2021-10-02 到職、2026-10-02 週年日（滿 5 年）→ 15 日",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2021-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 15
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_02",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "邊界：2024-08-01 到職、2026-08-01 週年日（滿 2 年）→ 10 日",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2024-08-01",
+    "as_of_date": "2026-08-01"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 10
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_03",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "邊界：2026-01-01 到職、2026-07-01（滿 6 個月）→ 3 日（請休期間 2026-07-01 到 2026-12-31）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2026-01-01",
+    "as_of_date": "2026-07-01"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 3
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_04",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "邊界：2016-10-02 到職、2026-10-02 週年日（滿 10 年）→ 16 日",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2016-10-02",
+    "as_of_date": "2026-10-02"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 16
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_05",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "一般：2021-03-15 到職、2026-03-15 週年日（滿 5 年）→ 15 日",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2021-03-15",
+    "as_of_date": "2026-03-15"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 15
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "leave_off_06",
+   "tool": "calc_annual_leave",
+   "rule": "leave.days",
+   "name": "一般：2023-08-15 到職、2026-08-15 週年日（滿 3 年）→ 14 日",
+   "tags": [
+    "一般"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "hire_date": "2023-08-15",
+    "as_of_date": "2026-08-15"
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "days": 14
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制）",
+   "source_url": "https://calcr2.mol.gov.tw/RestDays",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_04",
+   "tool": "calc_severance",
+   "rule": "sev.old_new_mixed",
+   "name": "例外：全舊制 1999-05-10 到職、2026-09-30 資遣（工作年資 27 年），平均工資 50,000：官方回 0，已符合退休條件",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "old_system_start_date": "1999-05-10",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 50000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "old_system": {
+       "amount": null,
+       "status": "retirement_conditions_met"
+      },
+      "severance_total": null
+     },
+     "unsupported": [
+      {
+       "code": "retirement_conditions_met"
+      }
+     ]
+    }
+   },
+   "legal_basis": "勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_07",
+   "tool": "calc_severance",
+   "rule": "sev.old_new_mixed",
+   "name": "例外：舊制 2000-01-01 起、2005-07-01 轉新制、2026-09-30 資遣（全部年資 26 年 9 個月），平均工資 62,000：舊制部分不算、新制 372,000",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "old_system_start_date": "2000-01-01",
+    "new_system_start_date": "2005-07-01",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 62000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "old_system": {
+       "amount": null,
+       "status": "retirement_conditions_met"
+      },
+      "new_system": {
+       "amount": 372000
+      },
+      "new_system_only_total": 372000,
+      "severance_total": null
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
+  },
+  {
+   "id": "sev_off_08",
+   "tool": "calc_severance",
+   "rule": "sev.old_new_mixed",
+   "name": "邊界：全舊制 2002-05-01 到職、2026-09-30 資遣（24 年 5 個月），平均工資 50,000 → 1,220,834（附退休提示）",
+   "tags": [
+    "邊界值"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-10-03",
+    "old_system_start_date": "2002-05-01",
+    "end_date": "2026-09-30",
+    "average_monthly_wage": 50000
+   },
+   "expected": {
+    "output_subset": {
+     "result": {
+      "severance_total": 1220834
+     }
+    }
+   },
+   "legal_basis": "勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表",
+   "source_url": "https://calcr2.mol.gov.tw/SeverancePay",
+   "retrieved_at": "2026-10-15",
+   "effective_date": "2026-10-03"
   }
  ]
 }

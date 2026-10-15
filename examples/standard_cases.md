@@ -1,6 +1,6 @@
 # 標準案例範例
 
-93 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+121 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -14,6 +14,12 @@
 | leave_04 | 邊界：到職 2016-10-02、2026-10-02 滿 10 年 → 16 日 | date 2026-10-03、hire_date 2016-10-02、as_of_date 2026-10-02 | result {"days":16} | 勞動基準法第 38 條 | 自行設計 |
 | leave_05 | 一般：到職 2023-08-01、2026-10-02（3 年 2 個月）→ 14 日 | date 2026-10-03、hire_date 2023-08-01、as_of_date 2026-10-02 | result {"days":14} | 勞動基準法第 38 條 | 自行設計 |
 | leave_06 | 一般：月薪 36,000、特休未休 4 日折發 4,800 | date 2026-10-03、hire_date 2020-01-01、as_of_date 2026-10-02、monthly_wage 36000、unused_days 4 | result {"unused_payout":4800} | 勞動基準法第 38 條 | 自行設計 |
+| leave_off_01 | 一般：2021-10-02 到職、2026-10-02 週年日（滿 5 年）→ 15 日 | date 2026-10-03、hire_date 2021-10-02、as_of_date 2026-10-02 | result {"days":15} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_02 | 邊界：2024-08-01 到職、2026-08-01 週年日（滿 2 年）→ 10 日 | date 2026-10-03、hire_date 2024-08-01、as_of_date 2026-08-01 | result {"days":10} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_03 | 邊界：2026-01-01 到職、2026-07-01（滿 6 個月）→ 3 日（請休期間 2026-07-01 到 2026-12-31） | date 2026-10-03、hire_date 2026-01-01、as_of_date 2026-07-01 | result {"days":3} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_04 | 邊界：2016-10-02 到職、2026-10-02 週年日（滿 10 年）→ 16 日 | date 2026-10-03、hire_date 2016-10-02、as_of_date 2026-10-02 | result {"days":16} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_05 | 一般：2021-03-15 到職、2026-03-15 週年日（滿 5 年）→ 15 日 | date 2026-10-03、hire_date 2021-03-15、as_of_date 2026-03-15 | result {"days":15} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
+| leave_off_06 | 一般：2023-08-15 到職、2026-08-15 週年日（滿 3 年）→ 14 日 | date 2026-10-03、hire_date 2023-08-15、as_of_date 2026-08-15 | result {"days":14} | 勞動基準法第 38 條；勞動部特別休假日數試算系統（週年制） | 官方 |
 
 ## `calc_business_income_tax`
 
@@ -69,6 +75,12 @@
 | nhi_off_13 | 一般：公民營事業有一定雇主受僱者投保金額 53,000，單位每月負擔 2,565 | date 2026-10-03、nhi_insured_amount 53000 | health_insurance {"employer":2565} | 全民健康保險法第 18、27 條；健保署保險費計算公式（費率 5.17%、平均眷口數 0.56） | 官方 |
 | pen_off_01 | 一般：月提繳工資 36,300、雇主 6%、自願提繳 3.5%，全月：雇主 2,178、自提 1,271 | date 2026-10-03、pension_wage 36300、voluntary_pension_rate 0.035 | labor_pension {"employer":2178,"employee_voluntary":1271} | 勞工退休金條例第 14 條；勞保局退休金計算說明（每月以 30 日計、角以下四捨五入） | 官方 |
 | pen_off_02 | 例外：2/25 到職（提繳 30−25+1＝6 天），月提繳工資 36,300、自願提繳 2.0%：雇主 436、自提 145 | date 2026-02-25、pension_wage 36300、voluntary_pension_rate 0.02、start_date 2026-02-25 | labor_pension {"employer":436,"employee_voluntary":145,"days":6} | 勞工退休金條例第 14 條；勞保局退休金計算說明（每月以 30 日計、角以下四捨五入） | 官方 |
+| li_off_01 | 邊界：勞保與災保都在最低級距 29,500、災保費率 0.22%，整月 | date 2026-10-03、labor_insured_salary 29500、occupational_insured_salary 29500、industry_rate 0.0015 | labor_insurance {"employee_li_only":679,"employer_li_only":2375,"employee_ei_only":59,"employer_ei_only":207,"employer_occupational":65,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_02 | 邊界：勞保最高級距 45,800、災保最高級距 72,800、災保費率 0.22%，整月 | date 2026-10-03、labor_insured_salary 45800、occupational_insured_salary 72800、industry_rate 0.0015 | labor_insurance {"employee_li_only":1053,"employer_li_only":3687,"employee_ei_only":92,"employer_ei_only":321,"employer_occupational":160,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_03 | 例外：月投保 36,300、當月只投保 15 日（10/16 到職）、災保費率 0.22% | date 2026-10-03、labor_insured_salary 36300、occupational_insured_salary 36300、industry_rate 0.0015、start_date 2026-10-16 | labor_insurance {"employee_li_only":417,"employer_li_only":1461,"employee_ei_only":36,"employer_ei_only":127,"employer_occupational":40,"days":15} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_04 | 一般：投保 40,100、災保費率 0.96%（高風險行業），整月 | date 2026-10-03、labor_insured_salary 40100、occupational_insured_salary 40100、industry_rate 0.0089 | labor_insurance {"employee_li_only":922,"employer_li_only":3228,"employee_ei_only":80,"employer_ei_only":281,"employer_occupational":385,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_05 | 邊界：勞保最低級距 11,100（部分工時）、災保照最低級距 29,500、災保費率 0.12%，整月 | date 2026-10-03、labor_insured_salary 11100、occupational_insured_salary 29500、industry_rate 0.0005 | labor_insurance {"employee_li_only":255,"employer_li_only":894,"employee_ei_only":22,"employer_ei_only":78,"employer_occupational":35,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_06 | 例外：月投保 34,800、當月投保 20 日（10/11 到職）、災保費率 0.44% | date 2026-10-03、labor_insured_salary 34800、occupational_insured_salary 34800、industry_rate 0.0037、start_date 2026-10-11 | labor_insurance {"employee_li_only":534,"employer_li_only":1868,"employee_ei_only":46,"employer_ei_only":162,"employer_occupational":102,"days":20} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
 
 ## `calc_overtime_pay`
 
@@ -89,6 +101,14 @@
 | ot_13 | 一般：月薪 36,000，國定假日 8 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type holiday、hours_worked 8 | result {"extra_pay":1200} | 勞動基準法第 24 條、第 39 條、第 40 條；勞動部加班費試算器的算法（倍率用分數、無條件進位到元） | 自行設計 |
 | ot_14 | 一般：月薪 42,000，國定假日 10 小時 | date 2026-10-03、pay_type monthly、wage 42000、day_type holiday、hours_worked 10 | result {"extra_pay":1867} | 勞動基準法第 24 條、第 39 條、第 40 條；勞動部加班費試算器的算法（倍率用分數、無條件進位到元） | 自行設計 |
 | ot_15 | 例外：月薪 32,000＋經常性津貼 3,400，平日出勤 11 小時（津貼計入時薪基數） | date 2026-10-03、pay_type monthly、wage 32000、monthly_regular_allowances 3400、day_type weekday、hours_worked 11 | result {"extra_pay":640} | 勞動基準法第 24 條、第 39 條、第 40 條；勞動部加班費試算器的算法（倍率用分數、無條件進位到元） | 自行設計 |
+| ot_off_01 | 一般：月薪 36,000，平日出勤 10 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type weekday、hours_worked 10 | result {"extra_pay":400} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_02 | 邊界：月薪 48,000，平日出勤 12 小時（日工時上限） | date 2026-10-03、pay_type monthly、wage 48000、day_type weekday、hours_worked 12 | result {"extra_pay":1200} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_03 | 一般：月薪 36,000，休息日 3 小時（前 2 小時 4/3、第 3 小時 5/3，不足 4 小時不以 4 小時計） | date 2026-10-03、pay_type monthly、wage 36000、day_type rest_day、hours_worked 3 | result {"extra_pay":650} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_04 | 邊界：月薪 42,000，休息日 9 小時（第 9 小時起 8/3，進位 2,683.33 → 2,684） | date 2026-10-03、pay_type monthly、wage 42000、day_type rest_day、hours_worked 9 | result {"extra_pay":2684} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_05 | 一般：月薪 60,000，休息日 11 小時（進位 5,166.67 → 5,167） | date 2026-10-03、pay_type monthly、wage 60000、day_type rest_day、hours_worked 11 | result {"extra_pay":5167} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_06 | 邊界：月薪 36,000，休息日 2 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type rest_day、hours_worked 2 | result {"extra_pay":400} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_07 | 一般：月薪 36,000，國定假日出勤 8 小時 | date 2026-10-03、pay_type monthly、wage 36000、day_type holiday、hours_worked 8 | result {"extra_pay":1200} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
+| ot_off_08 | 一般：月薪 42,000，國定假日出勤 10 小時（延長工時照平日加給） | date 2026-10-03、pay_type monthly、wage 42000、day_type holiday、hours_worked 10 | result {"extra_pay":1867} | 勞動基準法第 24 條、第 39 條；勞動部加班費試算系統（月薪制） | 官方 |
 
 ## `calc_severance`
 
@@ -102,6 +122,14 @@
 | sev_06 | 一般：用最近 6 個月工資 237,600、183 日算平均工資，新制年資 4 年 | date 2026-10-03、wages_last_6_months 237600、days_last_6_months 183、new_years 4 | result {"severance_total":77902} | 勞動基準法第 11、16、17 條；勞工退休金條例第 12 條；勞動部資遣費試算器的算法（資遣費無條件進位到元；預告工資四捨五入） | 自行設計 |
 | sev_07 | 一般：年資 2 年、已預告 12 日、月薪 45,000 → 應預告 20 日、補 8 日、預告工資 12,000 | date 2026-10-03、service_months_for_notice 24、notice_days_given 12、monthly_wage_for_notice 45000 | result {"notice":{"required_days":20,"short_days":8,"notice_pay":12000}} | 勞動基準法第 11、16、17 條；勞工退休金條例第 12 條；勞動部資遣費試算器的算法（資遣費無條件進位到元；預告工資四捨五入） | 自行設計 |
 | sev_08 | 邊界：年資 6 個月、未預告、月薪 29,500 → 預告 10 日、29,500÷30×10＝9,833.33 四捨五入 9,833 | date 2026-10-03、service_months_for_notice 6、notice_days_given 0、monthly_wage_for_notice 29500 | result {"notice":{"required_days":10,"short_days":10,"notice_pay":9833}} | 勞動基準法第 11、16、17 條；勞工退休金條例第 12 條；勞動部資遣費試算器的算法（資遣費無條件進位到元；預告工資四捨五入） | 自行設計 |
+| sev_off_01 | 一般：全新制，2019-03-01 到職、2026-09-30 資遣，平均工資 60,000（7 年 7 個月） | date 2026-10-03、new_system_start_date 2019-03-01、end_date 2026-09-30、average_monthly_wage 60000 | result {"severance_total":227500} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_02 | 一般：全新制，2024-08-15 到職、2026-10-31 資遣，平均工資 48,000（2 年 2 個月 17 日） | date 2026-10-03、new_system_start_date 2024-08-15、end_date 2026-10-31、average_monthly_wage 48000 | result {"severance_total":53134} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_03 | 例外：舊制 2002-03-01 起、2005-07-01 轉新制、2026-09-30 資遣，平均工資 62,000（新制達上限 6 個月） | date 2026-10-03、old_system_start_date 2002-03-01、new_system_start_date 2005-07-01、end_date 2026-09-30、average_monthly_wage 62000 | result {"severance_total":578667} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_05 | 邊界：全新制，2026-02-10 到職、2026-09-30 資遣，平均工資 30,000（未滿 1 年按比例） | date 2026-10-03、new_system_start_date 2026-02-10、end_date 2026-09-30、average_monthly_wage 30000 | result {"severance_total":9625} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_06 | 一般：全新制，2022-01-01 到職、2026-06-30 資遣，平均工資 45,000（4 年 6 個月） | date 2026-10-03、new_system_start_date 2022-01-01、end_date 2026-06-30、average_monthly_wage 45000 | result {"severance_total":101250} | 勞動基準法第 17 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_04 | 例外：全舊制 1999-05-10 到職、2026-09-30 資遣（工作年資 27 年），平均工資 50,000：官方回 0，已符合退休條件 | date 2026-10-03、old_system_start_date 1999-05-10、end_date 2026-09-30、average_monthly_wage 50000 | result {"old_system":{"amount":null,"status":"retirement_conditions_met"},"severance_total":null}、unsupported [{"code":"retirement_conditions_met"}] | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_07 | 例外：舊制 2000-01-01 起、2005-07-01 轉新制、2026-09-30 資遣（全部年資 26 年 9 個月），平均工資 62,000：舊制部分不算、新制 372,000 | date 2026-10-03、old_system_start_date 2000-01-01、new_system_start_date 2005-07-01、end_date 2026-09-30、average_monthly_wage 62000 | result {"old_system":{"amount":null,"status":"retirement_conditions_met"},"new_system":{"amount":372000},"new_system_only_total":372000,"severance_total":null} | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
+| sev_off_08 | 邊界：全舊制 2002-05-01 到職、2026-09-30 資遣（24 年 5 個月），平均工資 50,000 → 1,220,834（附退休提示） | date 2026-10-03、old_system_start_date 2002-05-01、end_date 2026-09-30、average_monthly_wage 50000 | result {"severance_total":1220834} | 勞動基準法第 17、53、55 條；勞工退休金條例第 12 條；勞動部資遣費試算表 | 官方 |
 
 ## `calc_vat_payable`
 
