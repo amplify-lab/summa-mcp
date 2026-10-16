@@ -171,7 +171,7 @@
 
 ## calc_labor_health_insurance
 
-算勞保、就保、職災、墊償基金、健保、勞退的金額（勞工自付、雇主負擔）。薪資題先呼叫 payroll_guide 再用這支。照 115 年勞保局分擔金額表（勞保、就保各自算到元再相加，按投保日數）、健保署負擔金額表（眷屬最多 3 人、雇主按平均眷口數 0.56）、勞退月提繳分級表；部分工時有較低級距。到職、離職當月帶 start_date 或 end_date 按日計（每月 30 日；健保按月）。另回 rules、source_refs、unsupported 三個固定欄位。
+算勞保、就保、職災、墊償基金、健保、勞退的金額（勞工自付、雇主負擔）。薪資題先呼叫 payroll_guide 再用這支。照 115 年勞保局分擔金額表（勞保、就保各自算到元再相加，按投保日數）、健保署負擔金額表（眷屬最多 3 人、雇主按平均眷口數 0.56）、勞退月提繳分級表；部分工時有較低級距。到職、離職當月帶 start_date 或 end_date 按日計（每月 30 日；勞保、就保、職災、墊償基金退保算到退保是日，勞退月末日離職算整月 30 日，兩者在月底離職時日數可能不同；健保按月）。另回 rules、source_refs、unsupported 三個固定欄位。
 
 **輸入**
 
@@ -184,7 +184,7 @@
 | `pension_wage` | integer |  | 直接指定勞退月提繳工資 |
 | `part_time` | boolean |  | 是不是部分工時（薪資未達最低工資時勞保有較低級距） |
 | `start_date` | string |  | YYYY-MM-DD；當月加保（到職）日；只算那一個月 |
-| `end_date` | string |  | YYYY-MM-DD；當月退保（離職）日 |
+| `end_date` | string |  | YYYY-MM-DD；當月退保（離職）日；勞保算到這一天（2月28日退保＝28日），勞退月末日離職算整月 30 日 |
 | `dependents` | integer |  | 健保眷屬人數（最多計 3 人） |
 | `industry_rate` | number |  | 職災保險行業別災害費率（例 0.0021 是 0.21%）；有帶才算職災保險費；跟 industry_code 都帶以這個為準 |
 | `industry_code` | integer |  | 職災保險行業類別編號（1 到 55，勞動部公告表的編號；用 lookup_code kind=occupational_industry_rate 查）；帶了就用表列費率算職災保險費，date 在 2025-01-01 之前回 not_found |

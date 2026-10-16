@@ -5744,6 +5744,286 @@
    "source_url": "https://www.etax.nat.gov.tw/etwmain/etw158w/35",
    "retrieved_at": "2026-10-16",
    "effective_date": "2025-12-31"
+  },
+  {
+   "id": "li_off_07",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "邊界：平年 2 月 28 日退保（整月在保到月底）→ 勞保投保 28 日，不是 30 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-02-03",
+    "labor_insured_salary": 36300,
+    "end_date": "2026-02-28"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 28
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-02-03"
+  },
+  {
+   "id": "li_off_08",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：2 月 18 日加保、2 月 28 日退保 → 勞保計收 11 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-02-03",
+    "labor_insured_salary": 36300,
+    "start_date": "2026-02-18",
+    "end_date": "2026-02-28"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 11
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-02-03"
+  },
+  {
+   "id": "li_off_09",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：2 月 8 日退保 → 勞保計收 8 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-02-03",
+    "labor_insured_salary": 36300,
+    "end_date": "2026-02-08"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 8
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-02-03"
+  },
+  {
+   "id": "pen_off_03",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：平年 2 月 28 日離職（月末日）→ 勞退提繳 30 日，雇主 2,178",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2026-02-03",
+    "pension_wage": 36300,
+    "end_date": "2026-02-28"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_pension": {
+      "days": 30,
+      "employer": 2178
+     }
+    }
+   },
+   "legal_basis": "勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/Files/18079",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-02-03"
+  },
+  {
+   "id": "pen_off_04",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：閏年 2 月 29 日離職（月末日）→ 勞退提繳 30 日，雇主 2,178",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2028-02-03",
+    "pension_wage": 36300,
+    "end_date": "2028-02-29"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_pension": {
+      "days": 30,
+      "employer": 2178
+     }
+    }
+   },
+   "legal_basis": "勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/Files/18079",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2028-02-03"
+  },
+  {
+   "id": "pen_off_05",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "邊界：閏年 2 月 28 日離職（不是月末日）→ 勞退提繳 28 日，雇主 2,033",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "official",
+   "input": {
+    "date": "2028-02-03",
+    "pension_wage": 36300,
+    "end_date": "2028-02-28"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_pension": {
+      "days": 28,
+      "employer": 2033
+     }
+    }
+   },
+   "legal_basis": "勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/Files/18079",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2028-02-03"
+  },
+  {
+   "id": "ins_09",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：平年 2 月 28 日離職，勞保 28 日、勞退 30 日（兩者不同）",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2027-02-03",
+    "labor_insured_salary": 36300,
+    "pension_wage": 36300,
+    "end_date": "2027-02-28"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 28
+     },
+     "labor_pension": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2027-02-03"
+  },
+  {
+   "id": "ins_10",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.prorate_days",
+   "name": "例外：閏年 2 月 29 日離職，勞保 29 日、勞退 30 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2028-02-03",
+    "labor_insured_salary": 36300,
+    "pension_wage": 36300,
+    "end_date": "2028-02-29"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 29
+     },
+     "labor_pension": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2028-02-03"
+  },
+  {
+   "id": "ins_11",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：4 月 30 日退保（月末日，30 日月份）→ 勞保 30 日、勞退 30 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-04-03",
+    "labor_insured_salary": 36300,
+    "pension_wage": 36300,
+    "end_date": "2026-04-30"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 30
+     },
+     "labor_pension": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-04-03"
+  },
+  {
+   "id": "ins_12",
+   "tool": "calc_labor_health_insurance",
+   "rule": "ins.full_month",
+   "name": "邊界：1 月 31 日退保（31 日月份）→ 勞保 30 日（31 日以 30 日封頂）、勞退 30 日",
+   "tags": [
+    "例外"
+   ],
+   "source_kind": "derived",
+   "input": {
+    "date": "2026-01-03",
+    "labor_insured_salary": 36300,
+    "pension_wage": 36300,
+    "end_date": "2026-01-31"
+   },
+   "expected": {
+    "output_subset": {
+     "labor_insurance": {
+      "days": 30
+     },
+     "labor_pension": {
+      "days": 30
+     }
+    }
+   },
+   "legal_basis": "勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題）",
+   "source_url": "https://www.bli.gov.tw/files/25714",
+   "retrieved_at": "2026-10-17",
+   "effective_date": "2026-01-03"
   }
  ]
 }

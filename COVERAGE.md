@@ -11,10 +11,10 @@
 | 試算工具（`calc_` 開頭） | 11 支 |
 | 有標準案例的試算工具 | 11 支 |
 | 規則 | 39 條 |
-| 標準案例 | 176 個 |
-| 官方案例 | 74 個（通過 74/74） |
-| 自行設計案例 | 102 個（通過 102/102） |
-| 可放對外範例（`public: true`） | 165 個 |
+| 標準案例 | 186 個 |
+| 官方案例 | 80 個（通過 80/80） |
+| 自行設計案例 | 106 個（通過 106/106） |
+| 可放對外範例（`public: true`） | 175 個 |
 | 官方表格比對 | 7 張表、10515 列（通過 10515/10515） |
 
 ## 每支試算工具
@@ -26,7 +26,7 @@
 | `calc_depreciation_tax_book_difference` | 1 | 0 | 4 | 4/4 |  |
 | `calc_donation_limit` | 1 | 0 | 4 | 4/4 |  |
 | `calc_entertainment_expense_limit` | 1 | 0 | 5 | 5/5 |  |
-| `calc_labor_health_insurance` | 6 | 11 | 8 | 19/19 |  |
+| `calc_labor_health_insurance` | 6 | 17 | 12 | 29/29 |  |
 | `calc_overtime_pay` | 4 | 8 | 16 | 24/24 |  |
 | `calc_personal_income_tax` | 9 | 8 | 11 | 19/19 |  |
 | `calc_severance` | 4 | 12 | 9 | 21/21 |  |
@@ -54,8 +54,8 @@
 | `overtime.rest_day`<br>休息日出勤：前 2 小時 4/3、第 3 至 8 小時 5/3、第 9 小時起 8/3（依實際出勤時數計，勞動部試算系統未滿 4 小時不補足 4 小時） | `calc_overtime_pay` | 4 | 5 | 9/9 | — | 例外 | — |
 | `overtime.holiday`<br>國定假日出勤：8 小時內加給 1 日工資，延長工時照平日加給 | `calc_overtime_pay` | 2 | 4 | 6/6 | — | 邊界值、例外 | — |
 | `overtime.regular_day_off_disaster`<br>例假因天災、事變、突發事件出勤：工資加倍並補假 | `calc_overtime_pay` | 0 | 1 | 1/1 | — | 一般、邊界值 | — |
-| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 3 | 3 | 6/6 | 50 | 例外 | 被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免；115 年度以前年度、非 11.5% 的普通事故費率 |
-| `ins.prorate_days`<br>到職或退保當月按投保日數計（勞保、就保、職災按日；健保、勞退依規則） | `calc_labor_health_insurance` | 3 | 2 | 5/5 | — | 一般、邊界值 | — |
+| `ins.full_month`<br>整月投保：勞保、就保、職災、墊償基金、健保、勞退的勞工自付與雇主負擔（投保級距對應） | `calc_labor_health_insurance` | 5 | 5 | 10/10 | 50 | — | 被保險人類別不是「有一定雇主員工參加就保」（雇主、職業工會會員、職訓機構受訓人員、育嬰留停續保、僅加災保等約 20 類）與身心障礙等級減免；115 年度以前年度、非 11.5% 的普通事故費率 |
+| `ins.prorate_days`<br>到職或退保當月按投保日數計（勞保、就保、職災按日；健保、勞退依規則） | `calc_labor_health_insurance` | 7 | 4 | 11/11 | — | 一般、邊界值 | — |
 | `ins.part_time`<br>部分工時：勞保照最低級距投保 | `calc_labor_health_insurance` | 0 | 1 | 1/1 | 56 | 一般、邊界值 | — |
 | `ins.health_dependents`<br>健保眷屬人數（本人加眷屬最多計 3 口）與雇主平均眷口數 | `calc_labor_health_insurance` | 3 | 1 | 4/4 | 232 | 例外 | 公民營事業受僱者以外的身分別（工會會員 60%、雇主 100%、公務人員 70%、私校教職員 35%、投保單位負擔 0%） |
 | `ins.pension_voluntary`<br>勞退雇主提繳 6% 與勞工自願提繳 1%～6% | `calc_labor_health_insurance` | 1 | 1 | 2/2 | — | 邊界值、例外 | — |

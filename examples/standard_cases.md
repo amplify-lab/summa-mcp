@@ -1,6 +1,6 @@
 # 標準案例範例
 
-165 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
+175 個標準案例，全部是虛構數字。每個案例的輸入丟給對應的試算工具，結果要跟這裡的「結果」一模一樣（覆蓋率報告每次產生時重跑）。機器可讀的版本是 [`standard_cases.json`](standard_cases.json)。
 
 「來源」欄：**官方**＝期望值來自官方試算工具、官方範例或條文例題；**自行設計**＝期望值是依法源逐條算出的算例。兩種分開計算。
 
@@ -93,6 +93,16 @@
 | li_off_04 | 一般：投保 40,100、災保費率 0.96%（高風險行業），整月 | date 2026-10-03、labor_insured_salary 40100、occupational_insured_salary 40100、industry_rate 0.0089 | labor_insurance {"employee_li_only":922,"employer_li_only":3228,"employee_ei_only":80,"employer_ei_only":281,"employer_occupational":385,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
 | li_off_05 | 邊界：勞保最低級距 11,100（部分工時）、災保照最低級距 29,500、災保費率 0.12%，整月 | date 2026-10-03、labor_insured_salary 11100、occupational_insured_salary 29500、industry_rate 0.0005 | labor_insurance {"employee_li_only":255,"employer_li_only":894,"employee_ei_only":22,"employer_ei_only":78,"employer_occupational":35,"days":30} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
 | li_off_06 | 例外：月投保 34,800、當月投保 20 日（10/11 到職）、災保費率 0.44% | date 2026-10-03、labor_insured_salary 34800、occupational_insured_salary 34800、industry_rate 0.0037、start_date 2026-10-11 | labor_insurance {"employee_li_only":534,"employer_li_only":1868,"employee_ei_only":46,"employer_ei_only":162,"employer_occupational":102,"days":20} | 勞工保險條例、就業保險法、勞工職業災害保險及保護法；勞保局保險費試算（115 年度、普通事故 11.5%、就保 1%） | 官方 |
+| li_off_07 | 邊界：平年 2 月 28 日退保（整月在保到月底）→ 勞保投保 28 日，不是 30 日 | date 2026-02-03、labor_insured_salary 36300、end_date 2026-02-28 | labor_insurance {"days":28} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起） | 官方 |
+| li_off_08 | 例外：2 月 18 日加保、2 月 28 日退保 → 勞保計收 11 日 | date 2026-02-03、labor_insured_salary 36300、start_date 2026-02-18、end_date 2026-02-28 | labor_insurance {"days":11} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起） | 官方 |
+| li_off_09 | 例外：2 月 8 日退保 → 勞保計收 8 日 | date 2026-02-03、labor_insured_salary 36300、end_date 2026-02-08 | labor_insurance {"days":8} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起） | 官方 |
+| pen_off_03 | 邊界：平年 2 月 28 日離職（月末日）→ 勞退提繳 30 日，雇主 2,178 | date 2026-02-03、pension_wage 36300、end_date 2026-02-28 | labor_pension {"days":30,"employer":2178} | 勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 官方 |
+| pen_off_04 | 邊界：閏年 2 月 29 日離職（月末日）→ 勞退提繳 30 日，雇主 2,178 | date 2028-02-03、pension_wage 36300、end_date 2028-02-29 | labor_pension {"days":30,"employer":2178} | 勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 官方 |
+| pen_off_05 | 邊界：閏年 2 月 28 日離職（不是月末日）→ 勞退提繳 28 日，雇主 2,033 | date 2028-02-03、pension_wage 36300、end_date 2028-02-28 | labor_pension {"days":28,"employer":2033} | 勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 官方 |
+| ins_09 | 例外：平年 2 月 28 日離職，勞保 28 日、勞退 30 日（兩者不同） | date 2027-02-03、labor_insured_salary 36300、pension_wage 36300、end_date 2027-02-28 | labor_insurance {"days":28}、labor_pension {"days":30} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 自行設計 |
+| ins_10 | 例外：閏年 2 月 29 日離職，勞保 29 日、勞退 30 日 | date 2028-02-03、labor_insured_salary 36300、pension_wage 36300、end_date 2028-02-29 | labor_insurance {"days":29}、labor_pension {"days":30} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 自行設計 |
+| ins_11 | 邊界：4 月 30 日退保（月末日，30 日月份）→ 勞保 30 日、勞退 30 日 | date 2026-04-03、labor_insured_salary 36300、pension_wage 36300、end_date 2026-04-30 | labor_insurance {"days":30}、labor_pension {"days":30} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 自行設計 |
+| ins_12 | 邊界：1 月 31 日退保（31 日月份）→ 勞保 30 日（31 日以 30 日封頂）、勞退 30 日 | date 2026-01-03、labor_insured_salary 36300、pension_wage 36300、end_date 2026-01-31 | labor_insurance {"days":30}、labor_pension {"days":30} | 勞工保險條例第 13 條、勞保局「非全月加保或月中變更加保身分保險費計算說明」（115 年 1 月 1 日起）；勞工退休金條例第 14 條；勞保局《伍、勞工退休金繳納》常見問答（十一（一）第 2、3 題） | 自行設計 |
 
 ## `calc_overtime_pay`
 
